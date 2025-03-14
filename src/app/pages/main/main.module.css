@@ -1,0 +1,75 @@
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-content: space-around;
+  align-items: center;
+
+  width: 60vw;
+  max-width: 60vw;
+  height: 60vh;
+  max-height: 60vh;
+
+  background-color: #fff;
+
+  border: 1px solid #000;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px #a5a5a5;
+}
+
+.mainContainerRound {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100px;
+  height: 100px;
+
+  background-color: #a5a5a5;
+  border-bottom: 2px solid #4d4d4d;
+  border-radius: 100px;
+  box-shadow: 0px 5px 5px #000;
+}
+
+.mainContainerRound:hover {
+  transition: 0.5s;
+  transform: translateY(5px);
+
+  box-shadow: 0px 3px 2px #000;
+  cursor: pointer;
+}
+
+.mainContainerRoundInner {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  width: 80px;
+  height: 80px;
+
+  background-color: #00000000;
+  border: 8px solid #006837;
+  border-top: none;
+  border-radius: 100px;
+}
+
+.mainContainerRoundInnerSquare {
+  width: 10px;
+  height: 40px;
+
+  background-color: #006837;
+  border-bottom: 1px solid #000;
+  border-radius: 10px;
+}
+
+.mainContainerRound:hover .mainContainerRoundInner,
+.mainContainerRound:hover .mainContainerRoundInnerSquare {
+  transition: 0.5s;
+  box-shadow: 0px 0px 10px #11c571;
+  border-color: #00bb64;
+}
+
+.mainContainerRound:hover .mainContainerRoundInnerSquare {
+  transition: 0.5s;
+  background-color: #00bb64;
+}
