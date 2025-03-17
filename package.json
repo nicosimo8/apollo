@@ -9,10 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "epoll": "^4.0.2",
     "next": "15.1.7",
     "onoff": "^6.0.3",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "rpi-gpio": "^2.1.7"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
