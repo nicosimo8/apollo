@@ -7,6 +7,4 @@ GPIO.setup(int(sys.argv[1]), GPIO.OUT)
 
 try:
   GPIO.output(int(sys.argv[1]), GPIO.LOW)
-  time.sleep(1)
 finally:
-  GPIO.cleanup()
