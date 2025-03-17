@@ -45,6 +45,18 @@ const Gpio = require('pigpio').Gpio;
 export async function GET() {
   try {
     console.log('***Test de LEDs - INICIO***');
+    const led = new Gpio(32, { mode: Gpio.OUTPUT });
+
+    let dutyCycle = 0;
+
+    setInterval(() => {
+      led.pwmWrite(dutyCycle);
+
+      dutyCycle += 5;
+      if (dutyCycle > 255) {
+        dutyCycle = 0;
+      }
+    }, 20);
     // Para las "No integradas"
     // GPIO
     // 0, 2, 3, 4, 5, 25, 27
