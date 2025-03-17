@@ -3,16 +3,12 @@ import time
 import sys
 
 GPIO.setmode(GPIO.BCM)
+GPIO.setup(sys.argv[1], GPIO.OUT)
 
-def funcTest(num):
-  try:
-    GPIO.setup(num, GPIO.OUT)
-    GPIO.output(num, GPIO.HIGH)
-    time.sleep(1)
-    GPIO.output(num, GPIO.LOW)
-    time.sleep(1)
-          
-  finally:
-    GPIO.cleanup()
-
-funcTest(sys.argv[1])
+try:
+  GPIO.output(sys.argv[1], GPIO.HIGH)
+  time.sleep(1)
+  GPIO.output(sys.argv[1], GPIO.LOW)
+  time.sleep(1)
+finally:
+  GPIO.cleanup()
