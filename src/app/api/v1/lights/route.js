@@ -46,7 +46,7 @@ import { PythonShell } from 'python-shell';
 export async function GET() {
   try {
     console.log('***Test de LEDs - INICIO***');
-    PythonShell.run(lightsTest.py, {}, (err, results) => {
+    PythonShell.run('lightsTest.py', (err, results) => {
       if (err) throw err;
       console.log('Results: ', results);
     });
