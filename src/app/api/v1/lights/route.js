@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 // import Gpio from 'onoff';
 // const Gpio = require('onoff').Gpio;
-var gpiop = require('rpi-gpio').promise;
+// var gpiop = require('rpi-gpio').promise;
+
+const Gpio = require('pigpio').Gpio;
 
 // export async function POST(req) {
 //   try {
