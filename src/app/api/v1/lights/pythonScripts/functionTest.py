@@ -3,12 +3,13 @@ import time
 import sys
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(sys.argv[1], GPIO.OUT)
+GPIO.setup(26, GPIO.OUT)
 
 try:
-  GPIO.output(sys.argv[1], GPIO.HIGH)
+  GPIO.output(26, GPIO.HIGH)
   time.sleep(1)
-  GPIO.output(sys.argv[1], GPIO.LOW)
+  GPIO.output(26, GPIO.LOW)
   time.sleep(1)
+  return sys.argv
 finally:
   GPIO.cleanup()
