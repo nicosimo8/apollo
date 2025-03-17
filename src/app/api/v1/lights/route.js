@@ -20,20 +20,13 @@ export async function POST(req) {
 
     console.log('***Semáforo - FIN***');
 
-    if (loginUs && loginPs) {
-      return NextResponse.json(
-        { message: "Validado con éxito", validation: true },
-        { status: 200 }
-      );
-    } else {
-      return NextResponse.json(
-        { message: "Usuario o Contraseña incorrectos", validation: false },
-        { status: 404 }
-      );
-    };
+    return NextResponse.json(
+      { message: "Consulta exitosa" },
+      { status: 200 }
+    );
   } catch (e) {
     return NextResponse.json(
-      { message: `Ha habido un error en la validación de datos: \n ${e.message}`, validation: false },
+      { message: `Ha habido un error en la consulta: \n ${e.message}` },
       { status: 500 }
     );
   };

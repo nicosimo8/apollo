@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 import time
+import sys
 
 GPIO.setmode(GPIO.BCM)
 
@@ -21,3 +22,5 @@ def funcTest(num):
           
   finally:
     GPIO.cleanup()
+
+funcTest(sys.argv[1])
