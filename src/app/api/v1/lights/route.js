@@ -6,16 +6,19 @@ export async function POST(req) {
     console.log('***Semáforo - INICIO***');
     console.log('- Consultando pedido');
 
-    const {
-      light,
-      number
-    } = await req.json();
+    const { number, onoff } = await req.json();
+    let file = "lightOn.py";
 
-    console.log(`- Pedido para #${number} color ${light || ' - '}`);
+    console.log(`- Pedido para GPIO #${number}`);
 
-    await PythonShell.run('./src/app/api/v1/lights/pythonScripts/functionTest.py', { args: [number] }, (err, results) => {
+    if (onoff) {
+      file = "lightOn.py"
+    } else {
+      file = "lightOff.py"
+    }
+
+    await PythonShell.run(`./src/app/api/v1/lights/pythonScripts/${file}`, { args: [number] }, (err, results) => {
       if (err) throw err;
-      console.log('Results: ', results);
     });
 
     console.log('***Semáforo - FIN***');
