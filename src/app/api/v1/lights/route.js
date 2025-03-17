@@ -13,7 +13,7 @@ export async function POST(req) {
 
     console.log(`- Pedido para #${number} color ${light || ' - '}`);
 
-    await PythonShell.run('./src/app/api/v1/lights/pythonScripts/functionTest.py', { args: [parseInt(number)] }, (err, results) => {
+    await PythonShell.run('./src/app/api/v1/lights/pythonScripts/functionTest.py', { args: [number] }, (err, results) => {
       if (err) throw err;
       console.log('Results: ', results);
     });
