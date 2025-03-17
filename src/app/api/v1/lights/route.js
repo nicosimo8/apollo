@@ -45,13 +45,6 @@ const Gpio = require('pigpio').Gpio;
 export async function GET() {
   try {
     console.log('***Test de LEDs - INICIO***');
-    gpiop.setup(32, gpiop.DIR_OUT)
-      .then(() => {
-        return gpiop.write(32, true)
-      })
-      .catch((err) => {
-        console.log('Error: ', err.toString())
-      })
     // Para las "No integradas"
     // GPIO
     // 0, 2, 3, 4, 5, 25, 27
