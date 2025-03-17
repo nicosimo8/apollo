@@ -10,6 +10,6 @@ try:
   time.sleep(1)
   GPIO.output(26, GPIO.LOW)
   time.sleep(1)
-  return sys.argv
+  print(sys.argv)
 finally:
   GPIO.cleanup()
