@@ -9,13 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "epoll": "^4.0.2",
     "next": "15.1.7",
-    "onoff": "^6.0.3",
-    "pigpio": "^3.3.1",
+    "python-shell": "^5.0.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "rpi-gpio": "^2.1.7"
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

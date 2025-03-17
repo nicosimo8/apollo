@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
+import { PythonShell } from 'python-shell';
+
 // import Gpio from 'onoff';
 // const Gpio = require('onoff').Gpio;
 // var gpiop = require('rpi-gpio').promise;
-
-const Gpio = require('pigpio').Gpio;
+// const Gpio = require('pigpio').Gpio;
 
 // export async function POST(req) {
 //   try {
@@ -45,18 +46,10 @@ const Gpio = require('pigpio').Gpio;
 export async function GET() {
   try {
     console.log('***Test de LEDs - INICIO***');
-    const led = new Gpio(32, { mode: Gpio.OUTPUT });
-
-    let dutyCycle = 0;
-
-    setInterval(() => {
-      led.pwmWrite(dutyCycle);
-
-      dutyCycle += 5;
-      if (dutyCycle > 255) {
-        dutyCycle = 0;
-      }
-    }, 20);
+    PythonShell.run(lightsTest.py, {}, (err, results) => {
+      if (err) throw err;
+      console.log('Results: ', results);
+    });
     // Para las "No integradas"
     // GPIO
     // 0, 2, 3, 4, 5, 25, 27
