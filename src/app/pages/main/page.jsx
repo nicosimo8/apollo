@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 import data from '../config/config.json';
@@ -8,13 +8,17 @@ import { butLightGreen, butOffGreen, butLightRed, butOffRed } from './buttons.js
 import Styles from './main.module.css';
 
 export default function Main() {
-  const [light1, setLight1] = useState({ on: true, col: "red" });
-  const [light2, setLight2] = useState({ on: true, col: "red" });
-  const [light3, setLight3] = useState({ on: true, col: "red" });
-  const [light4, setLight4] = useState({ on: true, col: "red" });
   const [configs, setConfigs] = useState(data);
 
   const router = useRouter();
+
+  useEffect(() => {
+    if (window) {
+      if (!localStorage.getItem('name') && !sessionStorage.getItem('name')) {
+        router.push('/pages/login');
+      };
+    };
+  }, []);
 
   const changeConfig = async (config) => {
     const data = await fetch("/api/v1/configs", {

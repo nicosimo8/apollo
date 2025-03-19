@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 import Button from "@/app/components/shared/Button";
@@ -10,6 +11,14 @@ import Styles from "./login.module.css";
 export default function Login() {
 
   const router = useRouter();
+
+  useEffect(() => {
+    if (window) {
+      if (localStorage.getItem('name') || sessionStorage.getItem('name')) {
+        router.push('/pages/main');
+      };
+    };
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -28,11 +37,13 @@ export default function Login() {
 
     if (res.validation) {
       if (ck) {
-        localStorage.setItem('remember', true)
+        localStorage.setItem('remember', true);
+        localStorage.setItem('name', process.env.CUSTOMER_NAME);
       } else {
-        localStorage.setItem('remember', false)
+        localStorage.setItem('remember', false);
+        localStorage.removeItem('name');
       };
-      localStorage.setItem('name', process.env.CUSTOMER_NAME)
+      sessionStorage.setItem('name', process.env.CUSTOMER_NAME);
       router.push('/pages/main');
     } else {
       alert(res.message);

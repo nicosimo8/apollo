@@ -1,0 +1,36 @@
+.layoutContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  height: 100vh;
+}
+
+.layoutHeaderLogo {
+  max-width: 12vw;
+  margin-left: 2vw;
+}
+
+.layoutHeaderExit,
+.layoutHeaderExitOff {
+  max-width: 4vw;
+  margin-right: 2vw;
+}
+
+.layoutHeaderExitOff {
+  visibility: hidden;
+}
+
+.layoutHeaderExit:hover {
+  transition: 0.3s;
+  cursor: pointer;
+  scale: 1.05;
+}
+
+.layoutFooter {
+  padding-bottom: 5vh;
+}
+
+.layoutFooter img {
+  max-width: 15vw;
+}
