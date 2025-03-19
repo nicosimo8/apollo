@@ -32,7 +32,7 @@ export default function Main() {
     setConfigs(res.data);
   };
 
-  const handleClick = async (id, number) => {
+  const handleClick = async (id, number, led) => {
     let newConf = configs;
     if (number == 1) {
       configs.lights[id].light1 = !configs.lights[id].light1;
@@ -40,41 +40,41 @@ export default function Main() {
       configs.lights[id].light2 = !configs.lights[id].light2;
     };
     await changeConfig(newConf);
-    await changeLed(id + 1, configs.lights[id].light1);
+    await changeLed(led, configs.lights[id].light1);
   };
 
-  const changeLed = async (number, onoff) => {
-    switch (number) {
+  const changeLed = async (led, onoff) => {
+    switch (parseInt(led)) {
       case 1:
-        number = parseInt(26);
+        led = parseInt(0);
         break;
       case 2:
-        number = parseInt(6);
+        led = parseInt(2);
         break;
       case 3:
-        number = parseInt(22);
+        led = parseInt(3);
         break;
       case 4:
-        number = parseInt(4);
+        led = parseInt(4);
         break;
       case 5:
-        number = parseInt(26);
+        led = parseInt(5);
         break;
       case 6:
-        number = parseInt(6);
+        led = parseInt(6);
         break;
       case 7:
-        number = parseInt(22);
+        led = parseInt(25);
         break;
       case 8:
-        number = parseInt(4);
+        led = parseInt(27);
         break;
     };
 
     const data = await fetch('/api/v1/lights/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ number, onoff })
+      body: JSON.stringify({ led, onoff })
     });
 
     const res = await data.json();
@@ -90,10 +90,10 @@ export default function Main() {
             {item.avaible && <div className={Styles.InnerLightsContainer}>
               <p>{item.name}</p>
               <div className={Styles.InnerLightsContainerButtons}>
-                <div onClick={() => handleClick(index, 1)}>
+                <div onClick={() => handleClick(index, 1, (index + 1))}>
                   {item.light1 && butLightGreen || butOffGreen}
                 </div>
-                <div onClick={() => handleClick(index, 2)}>
+                <div onClick={() => handleClick(index, 2, (index + 5))}>
                   {item.lights == 2 && (item.light2 && butLightRed || butOffRed)}
                 </div>
               </div>

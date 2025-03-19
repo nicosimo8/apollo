@@ -6,10 +6,10 @@ export async function POST(req) {
     console.log('***Semáforo - INICIO***');
     console.log('- Consultando pedido');
 
-    const { number, onoff } = await req.json();
+    const { led, onoff } = await req.json();
     let file = "lightOn.py";
 
-    console.log(`- Pedido para GPIO #${number} - Estado: ${onoff}`);
+    console.log(`- Pedido para GPIO #${led} - Estado: ${onoff}`);
 
     if (onoff) {
       file = "lightOn.py"
@@ -17,7 +17,7 @@ export async function POST(req) {
       file = "lightOff.py"
     }
 
-    await PythonShell.run(`./src/app/api/v1/lights/pythonScripts/${file}`, { args: [number] }, (err, results) => {
+    await PythonShell.run(`./src/app/api/v1/lights/pythonScripts/${file}`, { args: [led] }, (err, results) => {
       if (err) throw err;
     });
 

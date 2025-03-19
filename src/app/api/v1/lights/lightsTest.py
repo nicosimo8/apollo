@@ -3,31 +3,31 @@ import time
 
 GPIO.setmode(GPIO.BCM)
 
-# GPIO 26 Relay 1
-GPIO.setup(26, GPIO.OUT)
-# GPIO  6 Relay 2
-GPIO.setup(6, GPIO.OUT)
-# GPIO 22 Relay 3
-GPIO.setup(22, GPIO.OUT)
-# GPIO  4 Relay 4
+GPIO.setup(0, GPIO.OUT)
+GPIO.setup(2, GPIO.OUT)
+GPIO.setup(3, GPIO.OUT)
 GPIO.setup(4, GPIO.OUT)
+GPIO.setup(5, GPIO.OUT)
+GPIO.setup(6, GPIO.OUT)
+GPIO.setup(25, GPIO.OUT)
+GPIO.setup(27, GPIO.OUT)
 
 try:
-  GPIO.output(26, GPIO.HIGH)
+  GPIO.output(0, GPIO.HIGH)
   time.sleep(1)
-  GPIO.output(26, GPIO.LOW)
+  GPIO.output(2, GPIO.LOW)
   time.sleep(1)
-  GPIO.output(6, GPIO.HIGH)
+  GPIO.output(3, GPIO.HIGH)
+  time.sleep(1)
+  GPIO.output(4, GPIO.LOW)
+  time.sleep(1)
+  GPIO.output(5, GPIO.HIGH)
   time.sleep(1)
   GPIO.output(6, GPIO.LOW)
   time.sleep(1)
-  GPIO.output(22, GPIO.HIGH)
+  GPIO.output(25, GPIO.HIGH)
   time.sleep(1)
-  GPIO.output(22, GPIO.LOW)
-  time.sleep(1)
-  GPIO.output(4, GPIO.HIGH)
-  time.sleep(1)
-  GPIO.output(4, GPIO.LOW)
+  GPIO.output(27, GPIO.LOW)
   time.sleep(1)
         
 finally:
