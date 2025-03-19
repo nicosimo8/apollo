@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
         <Img
           src={'/assets/images/icons/Cerrar.png'}
           alt={"exit-icon"}
-          className={(sessionStorage.getItem('name') || localStorage.getItem('name')) && Styles.layoutHeaderExit || Styles.layoutHeaderExitOff}
+          className={Styles.layoutHeaderExit}
           onClick={handleClick}
         />
       </header>
