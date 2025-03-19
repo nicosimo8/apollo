@@ -14,7 +14,8 @@ const Input = ({
   name,
   error,
   register,
-  onChange
+  onChange,
+  checked
 }) => {
 
   function valError() {
@@ -41,6 +42,7 @@ const Input = ({
         readOnly={readOnly}
         className={valError()}
         onChange={onChange}
+        checked={checked}
       >
       </input>
       {error && <p> {error} </p>}

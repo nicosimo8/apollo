@@ -1,0 +1,15 @@
+Modos de configuración:
+
+lightsMode:
+  1: Solo 1 puede estar encendida
+  2: Solo 2 pueden estar encendidas
+  3: Solo 3 pueden estar encendidas
+  4: Solo 4 pueden estar encendidas
+  5: Solo 5 pueden estar encendidas
+  6: Solo 6 pueden estar encendidas
+  7: Solo 7 pueden estar encendidas
+  8: Todas pueden estar encendidas
+
+mode:
+  1: Solo 1 puede estar encendida
+  2: Todas pueden estar encendidas

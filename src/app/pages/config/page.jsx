@@ -1,28 +1,99 @@
+'use client'
+
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import data from './config.json';
+
+import Input from '@/app/components/shared/Input';
+import Styles from './config.module.css';
+import Select from '@/app/components/shared/Select';
 
 export default function Config() {
-  /*
-    Modos:
-    Semáforo (1 encendida 2 apagadas)
-    Semáforo inverso (1 apagada 2 encendidas)
-    Semáforo Color (1 encendida usando los colores X/Y, 2 apagadas)
-    Semáforo inverso Color (1 apagada 2 encendidas usando los colores X/Y)
-    Biluminado (1 encendida Color X, 2 encendidas Color Y)
-    Biluminado Inverso (1 encendida Color Y, 2 encendidas Color X)
-    Triple (3 encendidas/apagadas)
-    Triple Color (3 encendidas/apagadas usando los colores X/Y)
-    Botonera (Pueden estar cualquier número de apagadas/encendidas)
-    Botonera Color (Pueden estar cualquier número de apagadas/encendidas usando los colores X/Y)
-  */
-  return <h1>
-    <div>
-      <div>Config + dialogo</div>
-      <div>
-        <p>Input name</p>
-        <p>Input select</p>
-        <p>Input Checkbox</p>
+  const [lights, setLights] = useState([1, 2, 3, 4]);
+  const [configs, setConfigs] = useState(data);
+
+  const router = useRouter();
+
+  const testLed = async () => {
+    const data = await fetch('/api/v1/lights/', {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    });
+
+    const res = await data.json();
+
+    alert(res.message);
+  };
+
+  const changeConfig = async (config) => {
+    const data = await fetch("/api/v1/configs", {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(config)
+    });
+
+    const res = await data.json();
+
+    setConfigs(res.data);
+  };
+
+  const handleChange = async (e) => {
+    let newConf = configs;
+    if (e.target.name == 'lightsQuantity') {
+      await changeConfig({ ...configs, lightsQuantity: e.target.value });
+    } else if (e.target.type == 'search') {
+      configs.lights[e.target.name].name = e.target.value;
+    } else {
+      configs.lights[e.target.name].lights = parseInt(e.target.value);
+    };
+    await changeConfig(newConf);
+  };
+
+  const handleCheckChange = async (e) => {
+    let newConf = configs;
+    configs.lights[e.target.name].avaible = !configs.lights[e.target.name].avaible
+    await changeConfig(newConf);
+  };
+
+  return (
+    <div className={Styles.configContainer}>
+      <div className={Styles.configTitleContainer}>
+        <h1>{"Configuración"}</h1>
+        <p>{"Si los casilleros quedan en blanco se mostrarán los valores  por defecto."}</p>
       </div>
-      <div>Agregar semáforo</div>
+      <div className={Styles.configContainerOpt}>
+        <Select
+          text={'Cantidad de semáforos'}
+          defaultValue={configs.lightsQuantity}
+          values={[1, 2, 3, 4]}
+          onChange={handleChange}
+          name={'lightsQuantity'}
+        />
+        <Select
+          text={'Modo'}
+          defaultValue={configs.lightsMode}
+          values={[1, 2, 3, 4, 5, 6, 7, 8]}
+          fakeVals={["1 enc", "2 enc", "3 enc", "4 enc", "5 enc", "6 enc", "7 enc", "Todos enc",]}
+        />
+      </div>
+      <div className={Styles.configLightsContainer}>
+        {lights.map((item, index) => {
+          if (item > configs.lightsQuantity) {
+            return
+          } else {
+            return (
+              <div key={index} className={Styles.configLight}>
+                <Input text={`Semáforo ${item}`} defaultValue={configs.lights[index].name} type={'search'} onChange={handleChange} name={index} />
+                <Select text={"Luces"} defaultValue={configs.lights[index].lights} values={[1, 2]} type={'light'} onChange={handleChange} name={index} />
+                <Select text={"Modo"} defaultValue={configs.lights[index].mode} values={[1, 2]} fakeVals={["1 enc", "2 enc"]} />
+                <Input text={"Hab."} type='checkbox' checked={configs.lights[index].avaible} onChange={handleCheckChange} name={index} />
+              </div>
+            );
+          }
+        })}
+      </div>
+      <button onClick={testLed}>TEST</button>
+      <button onClick={() => router.push('/pages/main')}>VOLVER</button>
     </div>
-    <button>Config</button>
-  </h1>
+  );
 };

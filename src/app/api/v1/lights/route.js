@@ -9,7 +9,7 @@ export async function POST(req) {
     const { number, onoff } = await req.json();
     let file = "lightOn.py";
 
-    console.log(`- Pedido para GPIO #${number}`);
+    console.log(`- Pedido para GPIO #${number} - Estado: ${onoff}`);
 
     if (onoff) {
       file = "lightOn.py"

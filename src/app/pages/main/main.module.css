@@ -17,6 +17,40 @@
   box-shadow: 0px 0px 20px #a5a5a5;
 }
 
+.mainContainerLightsContainer {
+  display: flex;
+  justify-content: space-around;
+
+  width: 80%;
+  max-width: 80%;
+}
+
+.InnerLightsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  height: 40vh;
+}
+
+.InnerLightsContainerButtons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.InnerLightsContainerButtons>div {
+  margin-top: 5vh;
+}
+
+.InnerLightsContainer>p {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+
+/*LIGHTS BUTTONS*/
+
 .mainContainerRound {
   display: flex;
   justify-content: center;
@@ -25,7 +59,7 @@
   width: 100px;
   height: 100px;
 
-  background-color: #a5a5a5;
+  background: radial-gradient(#fff 10%, #a5a5a5 100%);
   border-bottom: 2px solid #4d4d4d;
   border-radius: 100px;
   box-shadow: 0px 5px 5px #000;
@@ -35,6 +69,7 @@
   transition: 0.5s;
   transform: translateY(5px);
 
+  border-bottom: 1px solid #4d4d4d;
   box-shadow: 0px 3px 2px #000;
   cursor: pointer;
 }
@@ -72,4 +107,200 @@
 .mainContainerRound:hover .mainContainerRoundInnerSquare {
   transition: 0.5s;
   background-color: #00bb64;
+}
+
+/*POWER OFF*/
+
+.mainContainerRoundInverse {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100px;
+  height: 100px;
+
+  background: radial-gradient(#fff 10%, #a5a5a5 100%);
+  transform: translateY(5px);
+
+  border-bottom: 1px solid #4d4d4d;
+  box-shadow: 0px 3px 2px #000;
+  border-radius: 100px;
+}
+
+.mainContainerRoundInverse:hover {
+  transition: 0.5s;
+  transform: translateY(0px);
+
+  border-bottom: 2px solid #4d4d4d;
+  box-shadow: 0px 5px 5px #000;
+  cursor: pointer;
+}
+
+.mainContainerRoundInverseInner {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  width: 80px;
+  height: 80px;
+
+  background-color: #00000000;
+  border: 8px solid #00bb64;
+  border-top: none;
+  border-radius: 100px;
+
+  box-shadow: 0px 0px 10px #11c571;
+}
+
+.mainContainerRoundInverseInnerSquare {
+  width: 10px;
+  height: 40px;
+
+  background-color: #00bb64;
+  border-bottom: 1px solid #000;
+  border-radius: 10px;
+
+  box-shadow: 0px 0px 10px #11c571;
+}
+
+.mainContainerRoundInverse:hover .mainContainerRoundInverseInner,
+.mainContainerRoundInverse:hover .mainContainerRoundInverseInnerSquare {
+  transition: 0.5s;
+
+  border-color: #006837;
+  box-shadow: none;
+}
+
+.mainContainerRoundInverse:hover .mainContainerRoundInverseInnerSquare {
+  transition: 0.5s;
+
+  background-color: #006837;
+}
+
+/************************ANOTHER COLOR************************/
+
+.mainContainerRoundRed {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100px;
+  height: 100px;
+
+  background: radial-gradient(#fff 10%, #a5a5a5 100%);
+  border-bottom: 2px solid #4d4d4d;
+  border-radius: 100px;
+  box-shadow: 0px 5px 5px #000;
+}
+
+.mainContainerRoundRed:hover {
+  transition: 0.5s;
+  transform: translateY(5px);
+
+  border-bottom: 1px solid #4d4d4d;
+  box-shadow: 0px 3px 2px #000;
+  cursor: pointer;
+}
+
+.mainContainerRoundRedInner {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  width: 80px;
+  height: 80px;
+
+  background-color: #00000000;
+  border: 8px solid #680000;
+  border-top: none;
+  border-radius: 100px;
+}
+
+.mainContainerRoundRedInnerSquare {
+  width: 10px;
+  height: 40px;
+
+  background-color: #680000;
+  border-bottom: 1px solid #000;
+  border-radius: 10px;
+}
+
+.mainContainerRoundRed:hover .mainContainerRoundRedInner,
+.mainContainerRoundRed:hover .mainContainerRoundRedInnerSquare {
+  transition: 0.5s;
+  box-shadow: 0px 0px 10px #c51111;
+  border-color: #c51111;
+}
+
+.mainContainerRoundRed:hover .mainContainerRoundRedInnerSquare {
+  transition: 0.5s;
+  background-color: #c51111;
+}
+
+/*POWER OFF*/
+
+.mainContainerRoundRedInverse {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100px;
+  height: 100px;
+
+  background: radial-gradient(#fff 10%, #a5a5a5 100%);
+  transform: translateY(5px);
+
+  border-bottom: 1px solid #4d4d4d;
+  box-shadow: 0px 3px 2px #000;
+  border-radius: 100px;
+}
+
+.mainContainerRoundRedInverse:hover {
+  transition: 0.5s;
+  transform: translateY(0px);
+
+  border-bottom: 2px solid #4d4d4d;
+  box-shadow: 0px 5px 5px #000;
+  cursor: pointer;
+}
+
+.mainContainerRoundRedInverseInner {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  width: 80px;
+  height: 80px;
+
+  background-color: #00000000;
+  border: 8px solid #c51111;
+  border-top: none;
+  border-radius: 100px;
+
+  box-shadow: 0px 0px 10px #c51111;
+}
+
+.mainContainerRoundRedInverseInnerSquare {
+  width: 10px;
+  height: 40px;
+
+  background-color: #c51111;
+  border-bottom: 1px solid #000;
+  border-radius: 10px;
+
+  box-shadow: 0px 0px 10px #c51111;
+}
+
+.mainContainerRoundRedInverse:hover .mainContainerRoundRedInverseInner,
+.mainContainerRoundRedInverse:hover .mainContainerRoundRedInverseInnerSquare {
+  transition: 0.5s;
+
+  border-color: #680000;
+  box-shadow: none;
+}
+
+.mainContainerRoundRedInverse:hover .mainContainerRoundRedInverseInnerSquare {
+  transition: 0.5s;
+
+  background-color: #680000;
 }
