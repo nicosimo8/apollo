@@ -46,28 +46,28 @@ export default function Main() {
   const changeLed = async (led, onoff) => {
     switch (parseInt(led)) {
       case 1:
-        led = parseInt(0);
+        led = parseInt(17);
         break;
       case 2:
-        led = parseInt(2);
+        led = parseInt(27);
         break;
       case 3:
-        led = parseInt(3);
+        led = parseInt(22);
         break;
       case 4:
-        led = parseInt(4);
+        led = parseInt(23);
         break;
       case 5:
-        led = parseInt(5);
+        led = parseInt(24);
         break;
       case 6:
-        led = parseInt(6);
-        break;
-      case 7:
         led = parseInt(25);
         break;
+      case 7:
+        led = parseInt(16);
+        break;
       case 8:
-        led = parseInt(27);
+        led = parseInt(26);
         break;
     };
 
