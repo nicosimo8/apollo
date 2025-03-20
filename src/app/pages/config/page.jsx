@@ -40,7 +40,7 @@ export default function Config() {
   const handleChange = async (e) => {
     let newConf = configs;
     if (e.target.name == 'lightsQuantity') {
-      await changeConfig({ ...configs, lightsQuantity: e.target.value });
+      configs.lightsQuantity = e.target.value;
     } else if (e.target.type == 'search') {
       configs.lights[e.target.name].name = e.target.value;
     } else {
@@ -92,8 +92,10 @@ export default function Config() {
           }
         })}
       </div>
-      <button onClick={testLed}>TEST</button>
-      <button onClick={() => router.push('/pages/main')}>VOLVER</button>
+      <div className={Styles.configContainerButtons}>
+        <button onClick={testLed} className={Styles.configContainerButton}>TEST</button>
+        <button onClick={() => router.push('/pages/main')} className={Styles.configContainerButton}>VOLVER</button>
+      </div>
     </div>
   );
 };

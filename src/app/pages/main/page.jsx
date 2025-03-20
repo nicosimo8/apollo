@@ -85,23 +85,25 @@ export default function Main() {
   return <div className={Styles.mainContainer}>
     <div className={Styles.mainContainerLightsContainer}>
       {configs.lights.map((item, index) => {
-        return (
-          <div key={index}>
-            {item.avaible && <div className={Styles.InnerLightsContainer}>
-              <p>{item.name}</p>
-              <div className={Styles.InnerLightsContainerButtons}>
-                <div onClick={() => handleClick(index, 1, (index + 1))}>
-                  {item.light1 && butLightGreen || butOffGreen}
+        if (index < configs.lightsQuantity) {
+          return (
+            <div key={index}>
+              {item.avaible && <div className={Styles.InnerLightsContainer}>
+                <p>{item.name}</p>
+                <div className={Styles.InnerLightsContainerButtons}>
+                  <div onClick={() => handleClick(index, 1, (index + 1))}>
+                    {item.light1 && butLightGreen || butOffGreen}
+                  </div>
+                  <div onClick={() => handleClick(index, 2, (index + 5))}>
+                    {item.lights == 2 && (item.light2 && butLightRed || butOffRed)}
+                  </div>
                 </div>
-                <div onClick={() => handleClick(index, 2, (index + 5))}>
-                  {item.lights == 2 && (item.light2 && butLightRed || butOffRed)}
-                </div>
-              </div>
-            </div>}
-          </div>
-        );
+              </div>}
+            </div>
+          );
+        };
       })}
     </div>
-    <button onClick={() => router.push('/pages/config')}>CONFIG</button>
+    <button onClick={() => router.push('/pages/config')} className={Styles.mainContainerButton}>CONFIG</button>
   </div>
 };

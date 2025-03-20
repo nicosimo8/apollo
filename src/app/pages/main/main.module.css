@@ -304,3 +304,22 @@
 
   background-color: #680000;
 }
+
+.mainContainerButton {
+  padding: 1vh 1vw;
+
+  border: 1px solid #a5a5a5;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px #a5a5a5;
+
+  background: #4eafff;
+  color: #fff;
+
+  font-weight: bold;
+}
+
+.mainContainerButton:hover {
+  cursor: pointer;
+  scale: 0.98;
+  box-shadow: 0px 0px 2px #a5a5a5;
+}
