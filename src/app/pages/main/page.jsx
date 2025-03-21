@@ -36,11 +36,12 @@ export default function Main() {
     let newConf = configs;
     if (number == 1) {
       configs.lights[id].light1 = !configs.lights[id].light1;
+      await changeLed(led, configs.lights[id].light1);
     } else {
       configs.lights[id].light2 = !configs.lights[id].light2;
+      await changeLed(led, configs.lights[id].light2);
     };
     await changeConfig(newConf);
-    await changeLed(led, configs.lights[id].light1);
   };
 
   const changeLed = async (led, onoff) => {
