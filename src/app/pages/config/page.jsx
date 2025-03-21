@@ -40,7 +40,7 @@ export default function Config() {
   const handleChange = async (e) => {
     let newConf = configs;
     if (e.target.name == 'lightsQuantity') {
-      configs.lightsQuantity = e.target.value;
+      configs.lightsQuantity = parseInt(e.target.value);
     } else if (e.target.type == 'search') {
       configs.lights[e.target.name].name = e.target.value;
     } else {
