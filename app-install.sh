@@ -6,12 +6,16 @@
 # node -v
 # nvm current
 # npm -v
-
+#INSTALAR PYTHON
+# echo "******DESCARGANDO E INSTALANDO PYTHON******"
+# sudo apt-get install python3-pip
+# pip3 --version
+# pip3 install rpi.gpio --break-system-packages
+# sudo apt install python3-rpi.gpio
 #INSTALAR DOCKER
 echo "******DESCARGANDO E INSTALANDO ACTUALIZACIONES******"
 sudo apt-get update
 sudo apt-get upgrade
-
 echo "******DESCARGANDO E INSTALANDO DOCKER******"
 curl -fsSL test.docker.com -o get-docker.sh
 sudo apt install ca-certificates curl gnupg lsb-release
