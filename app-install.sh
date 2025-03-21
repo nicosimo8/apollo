@@ -20,13 +20,3 @@ curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o 
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt update
 sudo apt install docker-ce docker-ce-cli containerd.io
-docker --version
-sudo usermod -aG docker $USER
-groups $USER
-newgrp docker
-docker run hello-world
-
-echo "******PERMITIENDO A DOCKER BOOTEAR DESDE EL INICIO******"
-sudo systemctl enable docker
-sudo systemctl start docker
-sudo systemctl status docker
