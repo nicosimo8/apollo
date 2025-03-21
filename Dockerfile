@@ -4,9 +4,9 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN sudo apt-get install python3-pip
+RUN apt-get install python3-pip
 RUN pip3 install rpi.gpio --break-system-packages
-RUN sudo apt install python3-rpi.gpio
+RUN apt install python3-rpi.gpio
 
 RUN npm install
 
