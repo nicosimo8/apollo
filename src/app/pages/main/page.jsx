@@ -105,6 +105,6 @@ export default function Main() {
         };
       })}
     </div>
-    <button onClick={() => router.push('/pages/config')} className={Styles.mainContainerButton}>CONFIG</button>
+    <button onClick={() => router.push('/pages/config')} className={Styles.mainContainerButton}>{"CONFIGURACIÓN"}</button>
   </div>
 };

@@ -7,6 +7,7 @@ import data from './config.json';
 import Input from '@/app/components/shared/Input';
 import Styles from './config.module.css';
 import Select from '@/app/components/shared/Select';
+import Img from '@/app/components/shared/Img';
 
 export default function Config() {
   const [lights, setLights] = useState([1, 2, 3, 4]);
@@ -58,7 +59,10 @@ export default function Config() {
   return (
     <div className={Styles.configContainer}>
       <div className={Styles.configTitleContainer}>
-        <h1>{"Configuración"}</h1>
+        <div className={Styles.configTitleContainerTitle}>
+          <Img src={"/assets/images/icons/Configuracion.png"} />
+          <h1>{"Configuración"}</h1>
+        </div>
         <p>{"Si los casilleros quedan en blanco se mostrarán los valores  por defecto."}</p>
       </div>
       <div className={Styles.configContainerOpt}>

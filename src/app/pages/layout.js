@@ -19,12 +19,12 @@ export default function RootLayout({ children }) {
     <div className={Styles.layoutContainer}>
       <header className={Styles.layoutHeader}>
         <Img
-          src={'/assets/images/logos/Apolo.png'}
+          src={'/assets/images/logos/Logo Apolo.png'}
           alt={"apolo-icon"}
           className={Styles.layoutHeaderLogo}
         />
         <Img
-          src={'/assets/images/icons/Cerrar.png'}
+          src={'/assets/images/icons/Salir.png'}
           alt={"exit-icon"}
           className={Styles.layoutHeaderExit}
           onClick={handleClick}
@@ -32,7 +32,7 @@ export default function RootLayout({ children }) {
       </header>
       {children}
       <footer className={Styles.layoutFooter}>
-        <Img src={'/assets/images/logos/Argos.png'} alt={"argos-icon"} />
+        <Img src={'/assets/images/logos/Logo Argos.png'} alt={"argos-icon"} />
         <div>
           <p>
             Apolo® es marca registrada de Argos Casilda S.A.S. Todos los derechos reservados.
@@ -44,7 +44,10 @@ export default function RootLayout({ children }) {
             Servicio Post Ventas comuníquese al 03464 15689109
           </p>
         </div>
-        <p>PRODUCTO ACTIVADO</p>
+        <div className={Styles.layoutFooterActivated}>
+          <p className={Styles.layoutFooterActivatedOne}>{"PRODUCTO ACTIVADO"}</p>
+          <p className={Styles.layoutFooterActivatedTwo}>Para más información <a href="argoscasilda@gmail.com">contáctenos</a>.</p>
+        </div>
       </footer>
     </div>
   );
