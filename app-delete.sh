@@ -1,3 +1,4 @@
+{
 echo "******CHECKEAR LOS CONTAINERS E IMAGENES******"
 docker ps -a
 docker image ls
@@ -12,3 +13,4 @@ docker image rm apolloimg:v0
 echo "******VOLVER A CHECKEAR LOS CONTAINERS E IMAGENES******"
 docker ps -a
 docker image ls
+}
