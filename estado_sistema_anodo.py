@@ -38,13 +38,6 @@ def is_docker_container_running(container_name="apollocontainer"):
         print("Error verificando contenedor:", e)
         return False
 
-def is_flask_responding():
-    try:
-        response = requests.get(f"http://localhost:{FLASK_PORT}", timeout=2)
-        return response.status_code == 200
-    except:
-        return False
-
 def main():
     setup_gpio()
     print("Sistema de monitoreo iniciado (ánodo común)...")
@@ -53,10 +46,7 @@ def main():
     while True:
         try:
             if is_docker_container_running():
-                if is_flask_responding():
-                    set_color(g=True)
-                else:
-                    blink_color(b=True, times=2, delay=0.5)
+                set_color(g=True)
             else:
                 blink_color(r=True, times=3, delay=0.4)
         except Exception as e:
