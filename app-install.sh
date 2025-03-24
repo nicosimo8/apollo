@@ -32,7 +32,7 @@ sudo usermod -aG docker $USER
 groups $USER
 /usr/bin/newgrp docker<<EONG
 EONG
-echo "******PERMITIENDO A DOCKER BOOTEAR DESDE EL INICIO******"
+echo "******PERMITIENDO A DOCKER, APOLO Y LEDS BOOTEAR DESDE EL INICIO******"
 sudo systemctl enable docker
 sudo systemctl start docker
 # sudo systemctl status docker
