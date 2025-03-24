@@ -1,0 +1,13 @@
+[Unit]
+Description=Monitor LED RGB del estado del sistema (Ánodo Común)
+After=multi-user.target docker.service network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/Argos/apollo/estado_led/estado_sistema_anodo.py
+Restart=always
+User=Argos
+WorkingDirectory=/home/Argos/apollo/estado_led
+
+[Install]
+WantedBy=multi-user.target
