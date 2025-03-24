@@ -35,7 +35,7 @@ EONG
 echo "******PERMITIENDO A DOCKER BOOTEAR DESDE EL INICIO******"
 sudo systemctl enable docker
 sudo systemctl start docker
-sudo systemctl status docker
+# sudo systemctl status docker
 sudo cp apolo.service /etc/systemd/system
 sudo cp estado_led_anodo.service /etc/systemd/system
 sudo systemctl daemon-reload
