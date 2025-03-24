@@ -27,7 +27,7 @@ def blink_color(r=False, g=False, b=False, times=1, delay=0.5):
         set_color(False, False, False)
         time.sleep(delay)
 
-def is_docker_container_running(container_name="semaforos"):
+def is_docker_container_running(container_name="apollocontainer"):
     try:
         result = subprocess.run(
             ["docker", "ps", "--filter", f"name={container_name}", "--format", "{{.Names}}"],
