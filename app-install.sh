@@ -36,7 +36,10 @@ sudo systemctl enable docker
 sudo systemctl start docker
 sudo systemctl status docker
 sudo cp apolo.service /etc/systemd/system
+sudo cp estado_led_anodo.service /etc/systemd/system
 sudo systemctl daemon-reload
+sudo systemctl enable estado_led_anodo.service
 sudo systemctl enable apolo
+sudo systemctl start estado_led_anodo.service
 sudo systemctl start apolo
 }

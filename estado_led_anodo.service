@@ -4,10 +4,10 @@ After=multi-user.target docker.service network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/python3 /home/Argos/apollo/estado_led/estado_sistema_anodo.py
+ExecStart=/usr/bin/python3 /home/Argos/apollo/estado_sistema_anodo.py
 Restart=always
 User=Argos
-WorkingDirectory=/home/Argos/apollo/estado_led
+WorkingDirectory=/home/Argos/apollo
 
 [Install]
 WantedBy=multi-user.target
