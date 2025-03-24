@@ -30,8 +30,8 @@ def blink_color(r=False, g=False, b=False, times=1, delay=0.5):
 def is_docker_container_running(container_name="apollocontainer"):
   try:
     result = subprocess.run(
-        ["docker", "ps", "--filter", f"name={container_name}", "--format", "{{.Names}}"],
-        stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
+      ["docker", "ps", "--filter", f"name={container_name}", "--format", "{{.Names}}"],
+      stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
     )
     return container_name in result.stdout
   except Exception as e:
