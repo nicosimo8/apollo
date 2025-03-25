@@ -1,4 +1,5 @@
 {
+echo "******APP-DELETE INICIO******"
 echo "******CHECKEAR LOS CONTAINERS E IMAGENES******"
 sudo docker ps -a
 sudo docker image ls
@@ -13,4 +14,5 @@ sudo docker image rm apolloimg:v0
 echo "******VOLVER A CHECKEAR LOS CONTAINERS E IMAGENES******"
 sudo docker ps -a
 sudo docker image ls
+echo "******APP-DELETE FIN******"
 }

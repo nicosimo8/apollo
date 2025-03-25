@@ -14,6 +14,7 @@
 # sudo apt install python3-rpi.gpio
 #INSTALAR DOCKER
 {
+echo "******APP-INSTALL INICIO******"
 echo "******DESCARGANDO E INSTALANDO ACTUALIZACIONES******"
 sudo apt-get update
 sudo apt-get -y upgrade
@@ -27,11 +28,6 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.
 sudo apt update
 sudo apt install docker-ce docker-ce-cli containerd.io
 
-echo "******DANDO PERMISOS A DOCKER******"
-sudo usermod -aG docker $USER
-groups $USER
-/usr/bin/newgrp docker<<EONG
-EONG
 echo "******PERMITIENDO A DOCKER, APOLO Y LEDS BOOTEAR DESDE EL INICIO******"
 sudo systemctl enable docker
 sudo systemctl start docker
@@ -46,4 +42,10 @@ sudo systemctl enable apolo
 sudo systemctl start estado_led_anodo
 sudo systemctl start test
 sudo systemctl start apolo
+
+echo "******DANDO PERMISOS A DOCKER******"
+sudo usermod -aG docker $USER
+groups $USER
+echo "******APP-INSTALL FIN******"
+newgrp docker
 }
