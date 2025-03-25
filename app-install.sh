@@ -36,8 +36,9 @@ echo "******PERMITIENDO A DOCKER, APOLO Y LEDS BOOTEAR DESDE EL INICIO******"
 sudo systemctl enable docker
 sudo systemctl start docker
 # sudo systemctl status docker
-sudo cp apolo.service /etc/systemd/system
 sudo cp estado_led_anodo.service /etc/systemd/system
+sudo cp test.service /etc/systemd/system
+sudo cp apolo.service /etc/systemd/system
 sudo systemctl daemon-reload
 sudo systemctl enable estado_led_anodo.service
 sudo systemctl enable test.service
