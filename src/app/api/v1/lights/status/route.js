@@ -10,9 +10,9 @@ export async function POST(req) {
 
     console.log(`- Pedido para GPIO #${led} por estado Estado`);
 
-    await PythonShell.run(`./src/app/api/v1/lights/pythonScripts/lightCheck.py`, { args: [led] }, (err, results) => {
-      console.log(results);
+    await PythonShell.run(`./src/app/api/v1/lights/pythonScripts/lightCheck.py`, { args: [led] }, function (err, results) {
       if (err) throw err;
+      console.log(results);
     });
 
     console.log('***Semáforo - FIN***');
