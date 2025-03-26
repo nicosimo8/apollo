@@ -42,7 +42,7 @@ export async function POST(req) {
       return result;
     };
 
-    const result = await execPython('./lightCheck.py', [led]);
+    const result = await execPython('lightCheck.py', [led]);
 
     console.log('***Semáforo - FIN***');
 
