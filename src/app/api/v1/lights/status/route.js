@@ -17,7 +17,7 @@ export async function POST(req) {
     // });
 
     const execPython = async (script, args) => {
-      const argum = args.map(arg => parseInt(arg));
+      const argum = args.map(arg => arg.toString());
 
       const py = spawn("python3", [script, ...argum]);
 
