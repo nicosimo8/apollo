@@ -52,7 +52,7 @@ export async function POST(req) {
     );
   } catch (e) {
     return NextResponse.json(
-      { message: `Ha habido un error en la consulta: \n ${e.message}` },
+      { message: `Ha habido un error en la consulta: \n ${e}` },
       { status: 500 }
     );
   };
