@@ -15,6 +15,13 @@ export async function POST(req) {
       if (err) throw err;
     });
 
+    let pyshell = new PythonShell("../pythonScripts/lightCheck.py");
+
+    pyshell.on('message', function (message) {
+      // received a message sent from the Python script (a simple "print" statement)
+      console.log(message);
+    });
+
     console.log('***Semáforo - FIN***');
 
     return NextResponse.json(
