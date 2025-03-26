@@ -19,7 +19,7 @@ export async function POST(req) {
     const execPython = async (script, args) => {
       const argum = args.map(arg => arg.toString());
 
-      const py = spawn("python", [script, ...argum]);
+      const py = spawn("python3", [script, ...argum]);
 
       const result = await new Promise((resolve, reject) => {
         let output;
@@ -42,12 +42,12 @@ export async function POST(req) {
       return result;
     };
 
-    const result = await execPython('lightCheck.py', [led]);
+    const data = await execPython('./src/app/api/v1/lights/status/lightCheck.py', [led]);
 
     console.log('***Semáforo - FIN***');
 
     return NextResponse.json(
-      { message: "Consulta exitosa", data: result },
+      { message: "Consulta exitosa", data: data },
       { status: 200 }
     );
   } catch (e) {
