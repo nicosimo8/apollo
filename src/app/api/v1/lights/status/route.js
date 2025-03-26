@@ -28,10 +28,15 @@ export async function POST(req) {
           output = JSON.parse(data);
         });
 
-        py.stderr.on("data", (data) => {
-          console.error(`[python] Error ocurred: ${data}`);
+        py.stderr.on('error', (err) => {
+          console.error(`[python] Error ocurred: ${err}`);
           reject(`Error ocurred in ${script}`);
         })
+
+        // py.stderr.on("data", (data) => {
+        //   console.error(`[python] Error ocurred: ${data}`);
+        //   reject(`Error ocurred in ${script}`);
+        // })
 
         py.on('exit', (code) => {
           console.log(`Child process exited with code ${code}`);
