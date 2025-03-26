@@ -7,13 +7,16 @@ export async function POST(req) {
     console.log('- Consultando pedido');
 
     const { led, onoff } = await req.json();
+    let state;
 
     console.log(`- Pedido para GPIO #${led} por estado Estado`);
 
     await PythonShell.run(`./src/app/api/v1/lights/pythonScripts/lightCheck.py`, { args: [led] }, function (err, results) {
       if (err) throw err;
-      console.log(results);
+      state = results;
     });
+
+    console.log(await state);
 
     console.log('***Semáforo - FIN***');
 
