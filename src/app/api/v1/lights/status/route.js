@@ -11,15 +11,9 @@ export async function POST(req) {
     console.log(`- Pedido para GPIO #${led} por estado Estado`);
 
     await PythonShell.run(`./src/app/api/v1/lights/pythonScripts/lightCheck.py`, { args: [led] }, (err, results) => {
-      console.log(results)
       if (err) throw err;
-    });
-
-    let pyshell = new PythonShell("../pythonScripts/lightCheck.py");
-
-    pyshell.on('message', function (message) {
-      // received a message sent from the Python script (a simple "print" statement)
-      console.log(message);
+    }).then(messages => {
+      console.log(messages);
     });
 
     console.log('***Semáforo - FIN***');
