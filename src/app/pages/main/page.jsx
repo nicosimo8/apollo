@@ -50,22 +50,22 @@ export default function Main() {
         led = parseInt(17);
         break;
       case 2:
-        led = parseInt(27);
-        break;
-      case 3:
         led = parseInt(22);
         break;
-      case 4:
-        led = parseInt(23);
-        break;
-      case 5:
+      case 3:
         led = parseInt(24);
         break;
+      case 4:
+        led = parseInt(16);
+        break;
+      case 5:
+        led = parseInt(27);
+        break;
       case 6:
-        led = parseInt(25);
+        led = parseInt(23);
         break;
       case 7:
-        led = parseInt(16);
+        led = parseInt(25);
         break;
       case 8:
         led = parseInt(26);
@@ -93,10 +93,10 @@ export default function Main() {
                 <p>{item.name}</p>
                 <div className={Styles.InnerLightsContainerButtons}>
                   <div onClick={() => handleClick(index, 1, (index + 1))}>
-                    {item.light1 && butLightGreen || butOffGreen}
+                    {item.light1 && butLightRed || butOffRed}
                   </div>
                   <div onClick={() => handleClick(index, 2, (index + 5))}>
-                    {item.lights == 2 && (item.light2 && butLightRed || butOffRed)}
+                    {item.lights == 2 && (item.light2 && butLightGreen || butOffGreen)}
                   </div>
                 </div>
               </div>}
