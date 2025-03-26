@@ -4,5 +4,6 @@ import sys
 
 try:
   status = GPIO.input(int(sys.argv[1]))
-finally:
   print(status)
+finally:
+  print("Finalizado")
