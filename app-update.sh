@@ -20,7 +20,7 @@ sudo docker ps -a
 sudo docker image ls
 
 cd ../
-rm -r apollo
+yes | rm -r apollo
 git clone https://github.com/nicosimo8/apollo.git
 cd apollo/
 

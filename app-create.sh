@@ -5,7 +5,7 @@ echo "******CREANDO IMAGEN******"
 sudo docker build . -t apolloimg:v0
 
 echo "******CREANDO Y CORRIENDO EL CONTAINER******"
-sudo docker run --privileged -d --restart=always -v /sys:/sys -p3000:3000 --name apollocontainer -e USERNAME_ONE="argos" -e USERNAME_TWO="argos2" -e USERNAME_THREE="argos3" -e PASSWORD_ONE="three.123" -e PASSWORD_TWO="Argos123" -e PASSWORD_THREE="testing" -e CUSTOMER_NAME="Argos Testing" apolloimg:v0
+sudo docker run --privileged -d --restart=always -v /sys:/sys -p3000:3000 --name apollocontainer -e USERNAME_ONE="admin" -e USERNAME_TWO="operador1" -e USERNAME_THREE="operador2" -e PASSWORD_ONE="admin" -e PASSWORD_TWO="coop.union1" -e PASSWORD_THREE="coop.union2" -e CUSTOMER_NAME="Coop. Unión" apolloimg:v0
 
 echo "******FINALIZANDO******"
 yes | sudo rm -rf readme.md
