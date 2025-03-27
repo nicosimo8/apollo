@@ -93,6 +93,18 @@ export default function Main() {
     newList.push(await data8.json());
 
     console.log(newList)
+
+    let counter = 0;
+    newList.map((item, index) => {
+      if (index > 3 && item.data) {
+        configs.lights[counter].light2 = item.data
+        counter++
+      } else if (item.data) {
+        configs.lights[index].light1 = item.data
+      };
+    });
+
+    changeConfig(configs);
   };
 
   const changeConfig = async (config) => {
