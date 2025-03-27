@@ -18,6 +18,8 @@ export default function Main() {
         router.push('/pages/login');
       };
       ledStatus();
+      console.log(configs.lights)
+      console.log(data.lights)
     };
   }, []);
 
@@ -95,7 +97,6 @@ export default function Main() {
     console.log(newList)
 
     newList.map((item, index) => {
-      console.log((parseInt(item.data) === 1))
       switch (index) {
         case 0:
           if (item.data) {
@@ -143,7 +144,7 @@ export default function Main() {
       }
     });
 
-    changeConfig(configs);
+    await changeConfig(configs);
   };
 
   const changeConfig = async (config) => {
@@ -161,12 +162,13 @@ export default function Main() {
   const handleClick = async (id, number, led) => {
     let newConf = configs;
     if (number == 1) {
-      configs.lights[id].light1 = !configs.lights[id].light1;
-      await changeLed(led, configs.lights[id].light1);
+      newConf.lights[id].light1 = !newConf.lights[id].light1;
+      await changeLed(led, newConf.lights[id].light1);
     } else {
-      configs.lights[id].light2 = !configs.lights[id].light2;
-      await changeLed(led, configs.lights[id].light2);
+      newConf.lights[id].light2 = !newConf.lights[id].light2;
+      await changeLed(led, newConf.lights[id].light2);
     };
+    setConfigs(newConf);
     await changeConfig(newConf);
   };
 
