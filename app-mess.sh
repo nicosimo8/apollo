@@ -12,10 +12,3 @@ yes | sudo rm -rf public
 yes | sudo rm -rf node_modules
 yes | sudo rm -rf build
 yes | sudo rm -rf .next
-
-
-
-# cd ../
-# yes | rm -r apollo
-# git clone https://github.com/nicosimo8/apollo.git
-# cd apollo/
