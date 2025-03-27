@@ -1,7 +1,9 @@
 'use client'
 
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import data from './config/config.json';
+import lock from '@/../lock.json';
 
 import Img from "../components/shared/Img";
 import Styles from './layout.module.css';
@@ -9,6 +11,26 @@ import "../globals.css";
 
 export default function RootLayout({ children }) {
   const router = useRouter();
+
+  useEffect(() => {
+    if (window) {
+      checkLock()
+    };
+  }, []);
+
+  const checkLock = async () => {
+    const data = await fetch("/api/v1/time", {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    });
+
+    const res = await data.json();
+
+    if (res.data.lock) {
+      await handleClick();
+      alert('Su licencia ha Expirado! \n Contactenos!')
+    };
+  };
 
   const handleClick = async () => {
     sessionStorage.removeItem('name');
@@ -108,7 +130,7 @@ export default function RootLayout({ children }) {
           </p>
         </div>
         <div className={Styles.layoutFooterActivated}>
-          <p className={Styles.layoutFooterActivatedOne}>{"PRODUCTO ACTIVADO"}</p>
+          <p className={lock.lock && Styles.layoutFooterActivatedOneRed || Styles.layoutFooterActivatedOne}>{lock.lock && "PRODUCTO DESACTIVADO" || "PRODUCTO ACTIVADO"}</p>
           <p className={Styles.layoutFooterActivatedTwo}>Para más información <a href="argoscasilda@gmail.com">contáctenos</a>.</p>
         </div>
       </footer>

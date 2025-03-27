@@ -18,19 +18,23 @@ export default function Main() {
         router.push('/pages/login');
       };
       ledStatus();
+      checkLock();
     };
   }, []);
 
-  // const ledStatus = async () => {
-  //   const data = await fetch("/api/v1/lights/status", {
-  //     method: 'GET',
-  //     headers: { 'Content-Type': 'application/json' }
-  //   });
+  const checkLock = async () => {
+    const data = await fetch("/api/v1/time", {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    });
 
-  //   const res = await data.json();
+    const res = await data.json();
 
-  //   console.log(res)
-  // };
+    if (res.data.lock) {
+      await handleClick();
+      alert('Su licencia ha Expirado! \n Contactenos!')
+    };
+  };
 
   const ledStatus = async () => {
     let newList = [];

@@ -50,16 +50,24 @@
   margin-right: 2vw;
 }
 
-.layoutFooterActivatedOne {
+.layoutFooterActivatedOne,
+.layoutFooterActivatedOneRed {
   max-width: 100%;
   padding: 0.5vh 0.5vw;
 
-  background-color: rgb(37, 194, 37);
   color: #fff;
 
   font-size: 0.7rem;
   text-align: center;
   border-radius: 5px;
+}
+
+.layoutFooterActivatedOne {
+  background-color: rgb(37, 194, 37);
+}
+
+.layoutFooterActivatedOneRed {
+  background-color: rgb(194, 37, 37);
 }
 
 .layoutFooterActivatedTwo {

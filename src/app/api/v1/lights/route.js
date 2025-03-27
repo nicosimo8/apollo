@@ -1,10 +1,13 @@
 import { NextResponse } from "next/server";
 import { PythonShell } from 'python-shell';
+import lock from '@/../lock.json';
 
 export async function POST(req) {
   try {
     console.log('***Semáforo - INICIO***');
     console.log('- Consultando pedido');
+
+    if (lock.lock) throw new Error('Licencia expiranda');
 
     const { led, onoff } = await req.json();
     let file = "lightOn.py";
