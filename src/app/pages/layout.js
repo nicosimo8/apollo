@@ -13,12 +13,12 @@ export default function RootLayout({ children }) {
   const handleClick = async () => {
     sessionStorage.removeItem('name');
     localStorage.removeItem('name');
-    router.push('/pages/login');
     await changeConfig(data);
     await data.lights.map((item, index) => {
       changeLed(index + 1, false);
       changeLed(index + 5, false);
     });
+    router.push('/pages/login');
   };
 
   const changeConfig = async (config) => {
