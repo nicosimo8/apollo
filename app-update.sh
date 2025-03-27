@@ -19,6 +19,11 @@ echo "******VOLVER A CHECKEAR LOS CONTAINERS E IMAGENES******"
 sudo docker ps -a
 sudo docker image ls
 
+cd ../
+rm -r apollo
+git clone https://github.com/nicosimo8/apollo.git
+cd apollo/
+
 sh app-create.sh
 
 echo "******APP-UPDATE FIN******"
