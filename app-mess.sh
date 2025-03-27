@@ -1,0 +1,21 @@
+yes | sudo rm -rf readme.md
+yes | sudo rm -rf package.json
+yes | sudo rm -rf package-lock.json
+yes | sudo rm -rf next.config.mjs
+yes | sudo rm -rf lock.json
+yes | sudo rm -rf jsconfig.json
+yes | sudo rm -rf eslint.config.mjs
+yes | sudo rm -rf Dockerfile
+yes | sudo rm -rf .env
+yes | sudo rm -rf src
+yes | sudo rm -rf public
+yes | sudo rm -rf node_modules
+yes | sudo rm -rf build
+yes | sudo rm -rf .next
+
+
+
+# cd ../
+# yes | rm -r apollo
+# git clone https://github.com/nicosimo8/apollo.git
+# cd apollo/
