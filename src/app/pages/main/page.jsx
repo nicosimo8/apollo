@@ -18,8 +18,6 @@ export default function Main() {
         router.push('/pages/login');
       };
       ledStatus();
-      console.log(configs.lights)
-      console.log(data.lights)
     };
   }, []);
 
@@ -94,7 +92,6 @@ export default function Main() {
     newList.push(await data7.json());
     newList.push(await data8.json());
 
-    console.log(newList)
     let newConf = configs;
 
     newList.map(async (item, index) => {
@@ -150,10 +147,9 @@ export default function Main() {
         default:
           console.log('No se asignaron configs');
           break;
-      }
+      };
     });
 
-    setConfigs(await newConf);
     await changeConfig(await newConf);
   };
 
@@ -171,18 +167,15 @@ export default function Main() {
 
   const handleClick = async (id, number, led) => {
     let newConf = configs;
+
     if (number == 1) {
-      console.log(newConf.lights[id].light1)
       newConf.lights[id].light1 = !newConf.lights[id].light1;
       await changeLed(led, newConf.lights[id].light1);
-      console.log(newConf.lights[id].light1)
     } else {
-      console.log(newConf.lights[id].light2)
       newConf.lights[id].light2 = !newConf.lights[id].light2;
       await changeLed(led, newConf.lights[id].light2);
-      console.log(newConf.lights[id].light2)
     };
-    setConfigs(newConf);
+
     await changeConfig(newConf);
   };
 
