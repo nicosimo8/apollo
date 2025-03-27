@@ -145,6 +145,7 @@ export default function Main() {
       }
     });
 
+    setConfigs(newConf);
     await changeConfig(newConf);
   };
 
