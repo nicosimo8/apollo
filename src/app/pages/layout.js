@@ -36,7 +36,7 @@ export default function RootLayout({ children }) {
 
     const res = await data.json();
 
-    setConfigs(res.data);
+    res;
   };
 
   const changeLed = async (led, onoff) => {
