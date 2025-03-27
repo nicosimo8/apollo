@@ -94,14 +94,52 @@ export default function Main() {
 
     console.log(newList)
 
-    let counter = 0;
     newList.map((item, index) => {
-      if (index > 3 && item.data) {
-        configs.lights[counter].light2 = item.data
-        counter++
-      } else if (item.data) {
-        configs.lights[index].light1 = item.data
-      };
+      switch (index) {
+        case 0:
+          if (item.data) {
+            configs.lights[0].light1 = item.data;
+          }
+          break;
+        case 1:
+          if (item.data) {
+            configs.lights[0].light2 = item.data;
+          }
+          break;
+        case 2:
+          if (item.data) {
+            configs.lights[1].light1 = item.data;
+          }
+          break;
+        case 3:
+          if (item.data) {
+            configs.lights[1].light2 = item.data;
+          }
+          break;
+        case 4:
+          if (item.data) {
+            configs.lights[2].light1 = item.data;
+          }
+          break;
+        case 5:
+          if (item.data) {
+            configs.lights[2].light2 = item.data;
+          }
+          break;
+        case 6:
+          if (item.data) {
+            configs.lights[3].light1 = item.data;
+          }
+          break;
+        case 7:
+          if (item.data) {
+            configs.lights[3].light2 = item.data;
+          }
+          break;
+        default:
+          console.log('No se asignaron configs');
+          break;
+      }
     });
 
     changeConfig(configs);
