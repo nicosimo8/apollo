@@ -18,8 +18,9 @@ export default function Main() {
         router.push('/pages/login');
       };
       ledStatus();
+      router.refresh()
     };
-  }, [data]);
+  }, [router]);
 
   // const ledStatus = async () => {
   //   const data = await fetch("/api/v1/lights/status", {
