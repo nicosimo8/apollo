@@ -1,14 +1,18 @@
+{
+echo "******APP-DELETE INICIO******"
 echo "******CHECKEAR LOS CONTAINERS E IMAGENES******"
-docker ps -a
-docker image ls
+sudo docker ps -a
+sudo docker image ls
 
 echo "******DETENIENDO Y ELIMINANDO EL CONTAINER******"
-docker stop apollocontainer
-docker rm apollocontainer
+sudo docker stop apollocontainer
+sudo docker rm apollocontainer
 
 echo "******ELIMINANDO LA IMAGEN******"
-docker image rm apolloimg:v0
+sudo docker image rm apolloimg:v0
 
 echo "******VOLVER A CHECKEAR LOS CONTAINERS E IMAGENES******"
-docker ps -a
-docker image ls
+sudo docker ps -a
+sudo docker image ls
+echo "******APP-DELETE FIN******"
+}

@@ -17,8 +17,143 @@ export default function Main() {
       if (!localStorage.getItem('name') && !sessionStorage.getItem('name')) {
         router.push('/pages/login');
       };
+      ledStatus();
+      checkLock();
     };
   }, []);
+
+  const checkLock = async () => {
+    const data = await fetch("/api/v1/time", {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    });
+
+    const res = await data.json();
+
+    if (res.data.lock) {
+      await handleClick();
+      alert('Su licencia ha Expirado! \n Contactenos!')
+    };
+  };
+
+  const ledStatus = async () => {
+    let newList = [];
+    let newConf = configs;
+
+    newConf.lights.forEach(item => {
+      item.light1 = false;
+      item.light2 = false;
+    });
+
+    await changeConfig(await newConf);
+
+    const data = await fetch("/api/v1/lights/status", {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ led: 17 })
+    });
+
+    const data2 = await fetch("/api/v1/lights/status", {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ led: 27 })
+    });
+
+    const data3 = await fetch("/api/v1/lights/status", {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ led: 22 })
+    });
+
+    const data4 = await fetch("/api/v1/lights/status", {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ led: 23 })
+    });
+
+    const data5 = await fetch("/api/v1/lights/status", {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ led: 24 })
+    });
+
+    const data6 = await fetch("/api/v1/lights/status", {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ led: 25 })
+    });
+
+    const data7 = await fetch("/api/v1/lights/status", {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ led: 16 })
+    });
+
+    const data8 = await fetch("/api/v1/lights/status", {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ led: 26 })
+    });
+
+    newList.push(await data.json());
+    newList.push(await data2.json());
+    newList.push(await data3.json());
+    newList.push(await data4.json());
+    newList.push(await data5.json());
+    newList.push(await data6.json());
+    newList.push(await data7.json());
+    newList.push(await data8.json());
+
+    newList.map(async (item, index) => {
+      switch (index) {
+        case 0:
+          if (item.data) {
+            newConf.lights[0].light1 = (parseInt(item.data) === 1);
+          };
+          break;
+        case 1:
+          if (item.data) {
+            newConf.lights[0].light2 = (parseInt(item.data) === 1);
+          };
+          break;
+        case 2:
+          if (item.data) {
+            newConf.lights[1].light1 = (parseInt(item.data) === 1);
+          };
+          break;
+        case 3:
+          if (item.data) {
+            newConf.lights[1].light2 = (parseInt(item.data) === 1);
+          };
+          break;
+        case 4:
+          if (item.data) {
+            newConf.lights[2].light1 = (parseInt(item.data) === 1);
+          };
+          break;
+        case 5:
+          if (item.data) {
+            newConf.lights[2].light2 = (parseInt(item.data) === 1);
+          };
+          break;
+        case 6:
+          if (item.data) {
+            newConf.lights[3].light1 = (parseInt(item.data) === 1);
+          };
+          break;
+        case 7:
+          if (item.data) {
+            newConf.lights[3].light2 = (parseInt(item.data) === 1);
+          };
+          break;
+        default:
+          console.log('No se asignaron configs');
+          break;
+      };
+    });
+
+    await changeConfig(await newConf);
+  };
 
   const changeConfig = async (config) => {
     const data = await fetch("/api/v1/configs", {
@@ -34,13 +169,15 @@ export default function Main() {
 
   const handleClick = async (id, number, led) => {
     let newConf = configs;
+
     if (number == 1) {
-      configs.lights[id].light1 = !configs.lights[id].light1;
-      await changeLed(led, configs.lights[id].light1);
+      newConf.lights[id].light1 = !newConf.lights[id].light1;
+      await changeLed(led, newConf.lights[id].light1);
     } else {
-      configs.lights[id].light2 = !configs.lights[id].light2;
-      await changeLed(led, configs.lights[id].light2);
+      newConf.lights[id].light2 = !newConf.lights[id].light2;
+      await changeLed(led, newConf.lights[id].light2);
     };
+
     await changeConfig(newConf);
   };
 
@@ -50,22 +187,22 @@ export default function Main() {
         led = parseInt(17);
         break;
       case 2:
-        led = parseInt(27);
-        break;
-      case 3:
         led = parseInt(22);
         break;
-      case 4:
-        led = parseInt(23);
-        break;
-      case 5:
+      case 3:
         led = parseInt(24);
         break;
+      case 4:
+        led = parseInt(16);
+        break;
+      case 5:
+        led = parseInt(27);
+        break;
       case 6:
-        led = parseInt(25);
+        led = parseInt(23);
         break;
       case 7:
-        led = parseInt(16);
+        led = parseInt(25);
         break;
       case 8:
         led = parseInt(26);
@@ -93,10 +230,10 @@ export default function Main() {
                 <p>{item.name}</p>
                 <div className={Styles.InnerLightsContainerButtons}>
                   <div onClick={() => handleClick(index, 1, (index + 1))}>
-                    {item.light1 && butLightGreen || butOffGreen}
+                    {item.light1 && butLightRed || butOffRed}
                   </div>
                   <div onClick={() => handleClick(index, 2, (index + 5))}>
-                    {item.lights == 2 && (item.light2 && butLightRed || butOffRed)}
+                    {item.lights == 2 && (item.light2 && butLightGreen || butOffGreen)}
                   </div>
                 </div>
               </div>}
@@ -105,6 +242,6 @@ export default function Main() {
         };
       })}
     </div>
-    <button onClick={() => router.push('/pages/config')} className={Styles.mainContainerButton}>CONFIG</button>
+    <button onClick={() => router.push('/pages/config')} className={Styles.mainContainerButton}>{"CONFIGURACIÓN"}</button>
   </div>
 };

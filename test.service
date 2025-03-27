@@ -1,0 +1,9 @@
+[Unit]
+Description=Redis container
+After=multi-user.target
+
+[Service]
+ExecStart=/usr/bin/python3 /home/Argos/apollo/src/app/api/v1/lights/lightsTest.py
+
+[Install]
+WantedBy=default.target

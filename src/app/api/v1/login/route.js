@@ -1,11 +1,14 @@
 'use server'
 
 import { NextResponse } from "next/server";
+import lock from '@/../lock.json';
 
 export async function POST(req) {
   try {
     console.log('***Login - INICIO***');
     console.log('- Consultando credenciales');
+
+    if (lock.lock) throw new Error('Su licencia ha expirado');
 
     let loginUs = false;
     let loginPs = false;

@@ -13,14 +13,39 @@
 # pip3 install rpi.gpio --break-system-packages
 # sudo apt install python3-rpi.gpio
 #INSTALAR DOCKER
+{
+echo "******APP-INSTALL INICIO******"
 echo "******DESCARGANDO E INSTALANDO ACTUALIZACIONES******"
 sudo apt-get update
-sudo apt-get upgrade
+sudo apt-get -y upgrade
+
 echo "******DESCARGANDO E INSTALANDO DOCKER******"
 curl -fsSL test.docker.com -o get-docker.sh
 sudo apt install ca-certificates curl gnupg lsb-release
-sudo mkdir -p /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+yes | sudo mkdir -p /etc/apt/keyrings
+yes | curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt update
 sudo apt install docker-ce docker-ce-cli containerd.io
+
+echo "******PERMITIENDO A DOCKER, APOLO Y LEDS BOOTEAR DESDE EL INICIO******"
+sudo systemctl enable docker
+sudo systemctl start docker
+# sudo systemctl status docker
+sudo cp estado_led_anodo.service /etc/systemd/system
+sudo cp test.service /etc/systemd/system
+sudo cp apolo.service /etc/systemd/system
+sudo systemctl daemon-reload
+sudo systemctl enable estado_led_anodo.service
+sudo systemctl enable test.service
+sudo systemctl enable apolo
+sudo systemctl start estado_led_anodo
+sudo systemctl start test
+sudo systemctl start apolo
+
+echo "******DANDO PERMISOS A DOCKER******"
+sudo usermod -aG docker $USER
+groups $USER
+echo "******APP-INSTALL FIN******"
+newgrp docker
+}

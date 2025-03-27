@@ -60,7 +60,7 @@ export default function Login() {
       <Input type={'text'} placeHolder={'Usuario'} name={'username'} />
       <Input type={'password'} placeHolder={'Contraseña'} name={'password'} />
       <div className={Styles.mainLoginFormButtons}>
-        <Input type={'checkbox'} text={'Desea recordar?'} name={'remember'} />
+        <Input type={'checkbox'} text={'Recordar usuario y contraseña'} name={'remember'} />
         <Button text={'Enviar'} onClick={() => { }} />
       </div>
     </form>
