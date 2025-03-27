@@ -95,6 +95,7 @@ export default function Main() {
     console.log(newList)
 
     newList.map((item, index) => {
+      console.log((parseInt(item.data) === 1))
       switch (index) {
         case 0:
           if (item.data) {
