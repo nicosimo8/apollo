@@ -18,9 +18,8 @@ export default function Main() {
         router.push('/pages/login');
       };
       ledStatus();
-      router.refresh()
     };
-  }, [router]);
+  }, []);
 
   // const ledStatus = async () => {
   //   const data = await fetch("/api/v1/lights/status", {
@@ -35,6 +34,14 @@ export default function Main() {
 
   const ledStatus = async () => {
     let newList = [];
+    let newConf = configs;
+
+    newConf.lights.forEach(item => {
+      item.light1 = false;
+      item.light2 = false;
+    });
+
+    await changeConfig(await newConf);
 
     const data = await fetch("/api/v1/lights/status", {
       method: 'POST',
@@ -92,8 +99,6 @@ export default function Main() {
     newList.push(await data6.json());
     newList.push(await data7.json());
     newList.push(await data8.json());
-
-    let newConf = configs;
 
     newList.map(async (item, index) => {
       switch (index) {
