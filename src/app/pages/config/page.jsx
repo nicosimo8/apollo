@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import data from './config.json';
 
@@ -11,7 +11,53 @@ import Img from '@/app/components/shared/Img';
 
 export default function Config() {
   const [lights, setLights] = useState([1, 2, 3, 4]);
-  const [configs, setConfigs] = useState(data);
+  const [configs, setConfigs] = useState({
+    lightsQuantity: 4,
+    lightsMode: 8,
+    lights: [
+      {
+        name: "Semáforo 1",
+        lights: 2,
+        light1: false,
+        light2: false,
+        avaible: true,
+        mode: 1
+      },
+      {
+        name: "Semáforo 2",
+        lights: 2,
+        light1: false,
+        light2: false,
+        avaible: true,
+        mode: 1
+      },
+      {
+        name: "Semáforo 3",
+        lights: 2,
+        light1: false,
+        light2: false,
+        avaible: true,
+        mode: 1
+      },
+      {
+        name: "Semáforo 4",
+        lights: 2,
+        light1: false,
+        light2: false,
+        avaible: true,
+        mode: 1
+      }
+    ]
+  });
+
+  useEffect(() => {
+    if (window) {
+      if (!localStorage.getItem('name') && !sessionStorage.getItem('name')) {
+        router.push('/pages/login');
+      };
+      setConfigs(data);
+    };
+  }, []);
 
   const router = useRouter();
 
