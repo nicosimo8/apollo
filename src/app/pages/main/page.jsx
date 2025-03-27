@@ -95,47 +95,48 @@ export default function Main() {
     newList.push(await data8.json());
 
     console.log(newList)
+    let newConf = configs;
 
     newList.map((item, index) => {
       switch (index) {
         case 0:
           if (item.data) {
-            configs.lights[0].light1 = (parseInt(item.data) === 1);
+            newConf.lights[0].light1 = (parseInt(item.data) === 1);
           }
           break;
         case 1:
           if (item.data) {
-            configs.lights[0].light2 = (parseInt(item.data) === 1);
+            newConf.lights[0].light2 = (parseInt(item.data) === 1);
           }
           break;
         case 2:
           if (item.data) {
-            configs.lights[1].light1 = (parseInt(item.data) === 1);
+            newConf.lights[1].light1 = (parseInt(item.data) === 1);
           }
           break;
         case 3:
           if (item.data) {
-            configs.lights[1].light2 = (parseInt(item.data) === 1);
+            newConf.lights[1].light2 = (parseInt(item.data) === 1);
           }
           break;
         case 4:
           if (item.data) {
-            configs.lights[2].light1 = (parseInt(item.data) === 1);
+            newConf.lights[2].light1 = (parseInt(item.data) === 1);
           }
           break;
         case 5:
           if (item.data) {
-            configs.lights[2].light2 = (parseInt(item.data) === 1);
+            newConf.lights[2].light2 = (parseInt(item.data) === 1);
           }
           break;
         case 6:
           if (item.data) {
-            configs.lights[3].light1 = (parseInt(item.data) === 1);
+            newConf.lights[3].light1 = (parseInt(item.data) === 1);
           }
           break;
         case 7:
           if (item.data) {
-            configs.lights[3].light2 = (parseInt(item.data) === 1);
+            newConf.lights[3].light2 = (parseInt(item.data) === 1);
           }
           break;
         default:
@@ -144,7 +145,7 @@ export default function Main() {
       }
     });
 
-    await changeConfig(configs);
+    await changeConfig(newConf);
   };
 
   const changeConfig = async (config) => {
