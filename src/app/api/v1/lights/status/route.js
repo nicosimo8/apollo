@@ -7,9 +7,7 @@ export async function GET() {
     console.log('- Consultando estados');
 
     const execPython = async (script, args) => {
-      const argum = args.map(arg => arg.toString());
-
-      const py = spawn("python3", [script, ...argum]);
+      const py = spawn("python3", [script, args]);
 
       const result = await new Promise((resolve, reject) => {
         let output;
@@ -32,7 +30,7 @@ export async function GET() {
       return result;
     };
 
-    const data = await execPython('./src/app/api/v1/lights/status/lightsCheck.py');
+    const data = await execPython('./src/app/api/v1/lights/status/lightsCheck.py', null);
 
     console.log('***Semáforo - FIN***');
 

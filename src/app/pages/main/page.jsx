@@ -20,6 +20,17 @@ export default function Main() {
     };
   }, []);
 
+  const ledStatus = async () => {
+    const data = await fetch("/api/v1/lights/status", {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    });
+
+    const res = await data.json();
+
+    console.log(res)
+  };
+
   const changeConfig = async (config) => {
     const data = await fetch("/api/v1/configs", {
       method: 'POST',
