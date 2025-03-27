@@ -153,7 +153,7 @@ export default function Main() {
       }
     });
 
-    await setConfigs(await newConf);
+    setConfigs(await newConf);
     await changeConfig(await newConf);
   };
 
@@ -172,11 +172,15 @@ export default function Main() {
   const handleClick = async (id, number, led) => {
     let newConf = configs;
     if (number == 1) {
+      console.log(newConf.lights[id].light1)
       newConf.lights[id].light1 = !newConf.lights[id].light1;
       await changeLed(led, newConf.lights[id].light1);
+      console.log(newConf.lights[id].light1)
     } else {
+      console.log(newConf.lights[id].light2)
       newConf.lights[id].light2 = !newConf.lights[id].light2;
       await changeLed(led, newConf.lights[id].light2);
+      console.log(newConf.lights[id].light2)
     };
     setConfigs(newConf);
     await changeConfig(newConf);
