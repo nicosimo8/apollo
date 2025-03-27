@@ -19,7 +19,7 @@ export default function Main() {
       };
       ledStatus();
     };
-  }, []);
+  }, [data]);
 
   // const ledStatus = async () => {
   //   const data = await fetch("/api/v1/lights/status", {
@@ -95,8 +95,6 @@ export default function Main() {
     let newConf = configs;
 
     newList.map(async (item, index) => {
-      console.log(parseInt(item.data));
-      console.log(parseInt(item.data) === 1)
       switch (index) {
         case 0:
           if (item.data) {
