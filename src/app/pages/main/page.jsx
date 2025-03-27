@@ -17,18 +17,82 @@ export default function Main() {
       if (!localStorage.getItem('name') && !sessionStorage.getItem('name')) {
         router.push('/pages/login');
       };
+      ledStatus();
     };
   }, []);
 
+  // const ledStatus = async () => {
+  //   const data = await fetch("/api/v1/lights/status", {
+  //     method: 'GET',
+  //     headers: { 'Content-Type': 'application/json' }
+  //   });
+
+  //   const res = await data.json();
+
+  //   console.log(res)
+  // };
+
   const ledStatus = async () => {
+    let newList = [];
+
     const data = await fetch("/api/v1/lights/status", {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' }
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(17)
     });
 
-    const res = await data.json();
+    const data2 = await fetch("/api/v1/lights/status", {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(27)
+    });
 
-    console.log(res)
+    const data3 = await fetch("/api/v1/lights/status", {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(22)
+    });
+
+    const data4 = await fetch("/api/v1/lights/status", {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(23)
+    });
+
+    const data5 = await fetch("/api/v1/lights/status", {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(24)
+    });
+
+    const data6 = await fetch("/api/v1/lights/status", {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(25)
+    });
+
+    const data7 = await fetch("/api/v1/lights/status", {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(16)
+    });
+
+    const data8 = await fetch("/api/v1/lights/status", {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(26)
+    });
+
+    newList.push(await data.json());
+    newList.push(await data2.json());
+    newList.push(await data3.json());
+    newList.push(await data4.json());
+    newList.push(await data5.json());
+    newList.push(await data6.json());
+    newList.push(await data7.json());
+    newList.push(await data8.json());
+
+    console.log(newList)
   };
 
   const changeConfig = async (config) => {
