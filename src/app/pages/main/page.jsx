@@ -38,49 +38,49 @@ export default function Main() {
     const data = await fetch("/api/v1/lights/status", {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(17)
+      body: JSON.stringify({ led: 17 })
     });
 
     const data2 = await fetch("/api/v1/lights/status", {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(27)
+      body: JSON.stringify({ led: 27 })
     });
 
     const data3 = await fetch("/api/v1/lights/status", {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(22)
+      body: JSON.stringify({ led: 22 })
     });
 
     const data4 = await fetch("/api/v1/lights/status", {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(23)
+      body: JSON.stringify({ led: 23 })
     });
 
     const data5 = await fetch("/api/v1/lights/status", {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(24)
+      body: JSON.stringify({ led: 24 })
     });
 
     const data6 = await fetch("/api/v1/lights/status", {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(25)
+      body: JSON.stringify({ led: 25 })
     });
 
     const data7 = await fetch("/api/v1/lights/status", {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(16)
+      body: JSON.stringify({ led: 16 })
     });
 
     const data8 = await fetch("/api/v1/lights/status", {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(26)
+      body: JSON.stringify({ led: 26 })
     });
 
     newList.push(await data.json());
