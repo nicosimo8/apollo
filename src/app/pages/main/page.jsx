@@ -98,42 +98,42 @@ export default function Main() {
       switch (index) {
         case 0:
           if (item.data) {
-            configs.lights[0].light1 = (item.data == 0) && (false || true);
+            configs.lights[0].light1 = (parseInt(item.data) === 1);
           }
           break;
         case 1:
           if (item.data) {
-            configs.lights[0].light2 = (item.data == 0) && (false || true);
+            configs.lights[0].light2 = (parseInt(item.data) === 1);
           }
           break;
         case 2:
           if (item.data) {
-            configs.lights[1].light1 = (item.data == 0) && (false || true);
+            configs.lights[1].light1 = (parseInt(item.data) === 1);
           }
           break;
         case 3:
           if (item.data) {
-            configs.lights[1].light2 = (item.data == 0) && (false || true);
+            configs.lights[1].light2 = (parseInt(item.data) === 1);
           }
           break;
         case 4:
           if (item.data) {
-            configs.lights[2].light1 = (item.data == 0) && (false || true);
+            configs.lights[2].light1 = (parseInt(item.data) === 1);
           }
           break;
         case 5:
           if (item.data) {
-            configs.lights[2].light2 = (item.data == 0) && (false || true);
+            configs.lights[2].light2 = (parseInt(item.data) === 1);
           }
           break;
         case 6:
           if (item.data) {
-            configs.lights[3].light1 = (item.data == 0) && (false || true);
+            configs.lights[3].light1 = (parseInt(item.data) === 1);
           }
           break;
         case 7:
           if (item.data) {
-            configs.lights[3].light2 = (item.data == 0) && (false || true);
+            configs.lights[3].light2 = (parseInt(item.data) === 1);
           }
           break;
         default:
