@@ -95,6 +95,8 @@ export default function Main() {
     let newConf = configs;
 
     newList.map(async (item, index) => {
+      console.log(parseInt(item.data));
+      console.log(parseInt(item.data) === 1)
       switch (index) {
         case 0:
           if (item.data) {
@@ -154,7 +156,6 @@ export default function Main() {
 
     const res = await data.json();
 
-    console.log(res.data)
     setConfigs(res.data);
   };
 
