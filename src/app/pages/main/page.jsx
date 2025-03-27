@@ -161,10 +161,10 @@ export default function Main() {
     let newConf = configs;
 
     if (number == 1) {
-      newConf.lights[id].light1 = !newConf.lights[id].light1;
+      newConf.lights[id].light1 = (newConf.lights[id].light1 === true);
       await changeLed(led, newConf.lights[id].light1);
     } else {
-      newConf.lights[id].light2 = !newConf.lights[id].light2;
+      newConf.lights[id].light2 = (newConf.lights[id].light2 === true);
       await changeLed(led, newConf.lights[id].light2);
     };
 
