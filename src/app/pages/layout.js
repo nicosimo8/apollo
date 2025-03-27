@@ -1,6 +1,7 @@
 'use client'
 
 import { useRouter } from "next/navigation";
+import data from './config/config.json';
 
 import Img from "../components/shared/Img";
 import Styles from './layout.module.css';
@@ -9,10 +10,72 @@ import "../globals.css";
 export default function RootLayout({ children }) {
   const router = useRouter();
 
-  const handleClick = () => {
+  const handleClick = async () => {
     sessionStorage.removeItem('name');
     localStorage.removeItem('name');
     router.push('/pages/login');
+    await changeConfig(data);
+    await data.lights.map((item, index) => {
+      changeLed(index + 1, false);
+      changeLed(index + 5, false);
+    });
+  };
+
+  const changeConfig = async (config) => {
+    let newConf = config;
+    newConf.lights.forEach(item => {
+      item.light1 = false;
+      item.light2 = false;
+    });
+
+    const data = await fetch("/api/v1/configs", {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newConf)
+    });
+
+    const res = await data.json();
+
+    setConfigs(res.data);
+  };
+
+  const changeLed = async (led, onoff) => {
+    switch (parseInt(led)) {
+      case 1:
+        led = parseInt(17);
+        break;
+      case 2:
+        led = parseInt(22);
+        break;
+      case 3:
+        led = parseInt(24);
+        break;
+      case 4:
+        led = parseInt(16);
+        break;
+      case 5:
+        led = parseInt(27);
+        break;
+      case 6:
+        led = parseInt(23);
+        break;
+      case 7:
+        led = parseInt(25);
+        break;
+      case 8:
+        led = parseInt(26);
+        break;
+    };
+
+    const data = await fetch('/api/v1/lights/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ led, onoff })
+    });
+
+    const res = await data.json();
+
+    console.log(res.message);
   };
 
   return (
