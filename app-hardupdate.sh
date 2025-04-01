@@ -4,9 +4,9 @@ echo "******ELIMINANDO******"
 cd ..
 yes | rm -r apollo
 echo "******VOLVIENDO A COPIAR******"
-sudo git clone https://github.com/nicosimo8/apollo.git
+git clone https://github.com/nicosimo8/apollo.git
 echo "******EJECUTANDO SCRIPT******"
 cd apollo/
-sudo git switch develop
-. ../apollo/app-update.sh
+git switch develop
+sh app-update.sh
 }
