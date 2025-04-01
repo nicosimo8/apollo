@@ -51,7 +51,11 @@ export default function Config() {
     if (e.target.name == 'lightsQuantity') {
       configs.lightsQuantity = parseInt(e.target.value);
     } else if (e.target.type == 'search') {
-      configs.lights[e.target.name].name = e.target.value;
+      if (e.target.value.length < 1) {
+        configs.lights[e.target.name].name = `Semáforo ${parseInt(e.target.name) + 1}`;
+      } else {
+        configs.lights[e.target.name].name = e.target.value;
+      }
     } else {
       configs.lights[e.target.name].lights = parseInt(e.target.value);
     };
