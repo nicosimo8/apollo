@@ -32,3 +32,10 @@ export const butLightRed = (
     </div>
   </div>
 );
+
+// NEW BUTTONS
+export const newButton = (
+  <div className={Styles.button}>
+    <div className={Styles.bar}></div>
+  </div>
+);
