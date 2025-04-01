@@ -8,4 +8,6 @@ git clone https://github.com/nicosimo8/apollo.git
 echo "******EJECUTANDO SCRIPT******"
 cd apollo/
 sh app-update.sh
+sh app-perm.sh
+sh app-mess.sh
 }
