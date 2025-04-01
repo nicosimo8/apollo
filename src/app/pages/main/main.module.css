@@ -326,19 +326,42 @@
 
 /*NEW BUTTON*/
 
-.button {
+.buttonOffGreen,
+.buttonOffRed,
+.buttonOnGreen,
+.buttonOnRed {
   position: relative;
   display: grid;
   place-items: center;
   /* 	design the outer circle */
-  width: 100px;
-  height: 100px;
+  width: 125px;
+  height: 125px;
   border-radius: 50%;
   border: 1px solid #ddd;
   box-shadow: 0 0 5px 0px #888;
+  background-color: #c7c7c7;
 }
 
-.button::before {
+.buttonOffGreen::before {
+  border: 10px solid #006400;
+}
+
+.buttonOnGreen::before {
+  border: 10px solid #00ff00;
+}
+
+.buttonOffRed::before {
+  border: 10px solid #640000;
+}
+
+.buttonOnRed::before {
+  border: 10px solid #ff0000;
+}
+
+.buttonOffGreen::before,
+.buttonOffRed::before,
+.buttonOnGreen::before,
+.buttonOnRed::before {
   position: absolute;
   /* pseudo-elements don't appear unless content property is declared */
   content: "";
@@ -347,32 +370,77 @@
   width: 50%;
   height: 50%;
   border-radius: 50%;
-  border: 10px solid #5d9c5d;
 }
 
-.bar {
+.barOffGreen,
+.barOffRed,
+.barOnGreen,
+.barOnRed {
   position: absolute;
-  top: 20px;
+  top: 15px;
   height: 30%;
   width: 10px;
-  background: #5d9c5d;
   border-radius: 10px;
   /* for rounded ends */
   box-shadow: 0 0 0 10px white;
 }
 
-.button:hover {
+.barOffGreen {
+  background: #006400;
+}
+
+.barOnGreen {
+  background: #00ff00;
+}
+
+.barOffRed {
+  background: #640000;
+}
+
+.barOnRed {
+  background: #ff0000;
+}
+
+.buttonOffGreen:hover,
+.buttonOffRed:hover {
   cursor: pointer;
 }
 
-.button:active {
+.buttonOffGreen:active,
+.buttonOffRed:active,
+.buttonOnGreen:active,
+.buttonOnRed:active {
   box-shadow: 0 0 10px 0px #888 inset;
 }
 
-.button:active .bar {
-  background: #90ee90;
+.buttonOffRed:active .barOffRed {
+  background: #ff0000;
 }
 
-.button:active::before {
-  border-color: lightgreen;
+.buttonOnRed:active .barOnRed {
+  background: #640000;
+}
+
+.buttonOffRed:active::before {
+  border-color: #ff0000;
+}
+
+.buttonOnRed:active::before {
+  border-color: #640000;
+}
+
+.buttonOffGreen:active .barOffGreen {
+  background: #00ff00;
+}
+
+.buttonOnGreen:active .barOnGreen {
+  background: #006400;
+}
+
+.buttonOffGreen:active::before {
+  border-color: #00ff00;
+}
+
+.buttonOnGreen:active::before {
+  border-color: #006400;
 }
