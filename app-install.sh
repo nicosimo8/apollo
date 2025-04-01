@@ -20,13 +20,13 @@ sudo apt-get update
 sudo apt-get -y upgrade
 
 echo "******DESCARGANDO E INSTALANDO DOCKER******"
-curl -fsSL test.docker.com -o get-docker.sh
-sudo apt install ca-certificates curl gnupg lsb-release
+yes | curl -fsSL test.docker.com -o get-docker.sh
+yes | sudo apt install ca-certificates curl gnupg lsb-release
 yes | sudo mkdir -p /etc/apt/keyrings
 yes | curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt update
-sudo apt install docker-ce docker-ce-cli containerd.io
+yes | echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+yes | sudo apt update
+yes | sudo apt install docker-ce docker-ce-cli containerd.io
 
 echo "******PERMITIENDO A DOCKER, APOLO Y LEDS BOOTEAR DESDE EL INICIO******"
 sudo systemctl enable docker
@@ -38,7 +38,7 @@ sudo cp apolo.service /etc/systemd/system
 sudo systemctl daemon-reload
 sudo systemctl enable estado_led_anodo.service
 sudo systemctl enable test.service
-sudo systemctl enable apolo
+sudo systemctl enable apolo.service
 sudo systemctl start estado_led_anodo
 sudo systemctl start test
 sudo systemctl start apolo
