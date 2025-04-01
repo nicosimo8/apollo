@@ -331,8 +331,8 @@
   display: grid;
   place-items: center;
   /* 	design the outer circle */
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   border: 1px solid #ddd;
   box-shadow: 0 0 5px 0px #888;
@@ -347,7 +347,7 @@
   width: 50%;
   height: 50%;
   border-radius: 50%;
-  border: 10px solid #eee;
+  border: 10px solid #5d9c5d;
 }
 
 .bar {
@@ -355,7 +355,7 @@
   top: 20px;
   height: 30%;
   width: 10px;
-  background: #eee;
+  background: #5d9c5d;
   border-radius: 10px;
   /* for rounded ends */
   box-shadow: 0 0 0 10px white;
@@ -370,7 +370,7 @@
 }
 
 .button:active .bar {
-  background: lightgreen;
+  background: #90ee90;
 }
 
 .button:active::before {
