@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 import data from '../config/config.json';
-import { butLightGreen, butOffGreen, butLightRed, butOffRed } from './buttons.jsx';
+import { butLightGreen, butOffGreen, butLightRed, butOffRed, newButton } from './buttons.jsx';
 import Styles from './main.module.css';
 
 export default function Main() {
@@ -233,7 +233,7 @@ export default function Main() {
                     {item.light1 && butLightRed || butOffRed}
                   </div>
                   <div onClick={() => handleClick(index, 2, (index + 5))}>
-                    {item.lights == 2 && (item.light2 && butLightGreen || butOffGreen)}
+                    {item.lights == 2 && (item.light2 && butLightGreen || newButton)}
                   </div>
                 </div>
               </div>}
