@@ -32,3 +32,28 @@ export const butLightRed = (
     </div>
   </div>
 );
+
+// NEW BUTTONS
+export const newButOffGreen = (
+  <div className={Styles.buttonOffGreen}>
+    <div className={Styles.barOffGreen}></div>
+  </div>
+);
+
+export const newButOnGreen = (
+  <div className={Styles.buttonOnGreen}>
+    <div className={Styles.barOnGreen}></div>
+  </div>
+);
+
+export const newButOffRed = (
+  <div className={Styles.buttonOffRed}>
+    <div className={Styles.barOffRed}></div>
+  </div>
+);
+
+export const newButOnRed = (
+  <div className={Styles.buttonOnRed}>
+    <div className={Styles.barOnRed}></div>
+  </div>
+);

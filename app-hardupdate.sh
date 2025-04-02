@@ -1,10 +1,13 @@
-
+{
 echo "******APP-HARDUPDATE INICIO******"
 echo "******ELIMINANDO******"
-cd ../
-yes | rm -r apollo
+cd ..
+yes | sudo rm -r apollo
 echo "******VOLVIENDO A COPIAR******"
 git clone https://github.com/nicosimo8/apollo.git
-cd apollo/
 echo "******EJECUTANDO SCRIPT******"
-sh app-upgrade.sh
+cd apollo/
+sh app-update.sh
+sh app-perm.sh
+sh app-mess.sh
+}

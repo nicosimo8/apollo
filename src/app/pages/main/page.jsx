@@ -4,7 +4,12 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 import data from '../config/config.json';
-import { butLightGreen, butOffGreen, butLightRed, butOffRed } from './buttons.jsx';
+import {
+  newButOffGreen,
+  newButOnGreen,
+  newButOffRed,
+  newButOnRed,
+} from './buttons.jsx';
 import Styles from './main.module.css';
 
 export default function Main() {
@@ -230,10 +235,10 @@ export default function Main() {
                 <p>{item.name}</p>
                 <div className={Styles.InnerLightsContainerButtons}>
                   <div onClick={() => handleClick(index, 1, (index + 1))}>
-                    {item.light1 && butLightRed || butOffRed}
+                    {item.light1 && newButOnRed || newButOffRed}
                   </div>
                   <div onClick={() => handleClick(index, 2, (index + 5))}>
-                    {item.lights == 2 && (item.light2 && butLightGreen || butOffGreen)}
+                    {item.lights == 2 && (item.light2 && newButOnGreen || newButOffGreen)}
                   </div>
                 </div>
               </div>}
