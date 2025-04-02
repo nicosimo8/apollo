@@ -31,7 +31,7 @@
       "lights": 2,
       "light1": false,
       "light2": false,
-      "avaible": true,
+      "avaible": false,
       "mode": 1
     }
   ]
