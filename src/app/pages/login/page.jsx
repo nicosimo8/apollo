@@ -27,7 +27,7 @@ export default function Login() {
     const ps = event.target.password.value;
     const ck = event.target.remember.checked;
 
-    const login = await fetch('/api/v1/login', {
+    const login = await fetch('/api/v2/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username: un, password: ps })

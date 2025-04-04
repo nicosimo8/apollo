@@ -1,7 +1,7 @@
 {
-  "firstStart": false,
-  "lockTime": "",
-  "actualTime": "",
-  "timePass": 0,
+  "firstStart": "2025-04-02T15:02:13.234Z",
+  "lockTime": "2025-05-02T15:02:13.234Z",
+  "actualTime": "2025-04-02T15:02:13.885Z",
+  "timePass": 651,
   "lock": false
 }
