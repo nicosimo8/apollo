@@ -21,4 +21,4 @@ state6 = GPIO.input(25)
 state7 = GPIO.input(16)
 state8 = GPIO.input(26)
 
-print([str(estate1), str(estate2), str(estate3), str(estate4), str(estate5), str(estate6), str(estate7), str(estate8)])
+print([str(state1), str(state2), str(state3), str(state4), str(state5), str(state6), str(state7), str(state8)])
