@@ -5,8 +5,8 @@ After=docker.service
 
 [Service]
 Restart=always
-ExecStart=/usr/bin/docker start -a apollodb
-ExecStop=/usr/bin/docker stop -t 2 apollodb
+ExecStart=/usr/bin/docker start -a apolodb
+ExecStop=/usr/bin/docker stop -t 2 apolodb
 
 [Install]
 WantedBy=default.target
