@@ -35,13 +35,16 @@ sudo systemctl start docker
 sudo cp estado_led_anodo.service /etc/systemd/system
 sudo cp test.service /etc/systemd/system
 sudo cp apolo.service /etc/systemd/system
+sudo cp apolodb.service /etc/systemd/system
 sudo systemctl daemon-reload
 sudo systemctl enable estado_led_anodo.service
 sudo systemctl enable test.service
 sudo systemctl enable apolo.service
+sudo systemctl enable apolodb.service
 sudo systemctl start estado_led_anodo
 sudo systemctl start test
 sudo systemctl start apolo
+sudo systemctl start apolodb
 
 echo "******DANDO PERMISOS A DOCKER******"
 sudo usermod -aG docker $USER
