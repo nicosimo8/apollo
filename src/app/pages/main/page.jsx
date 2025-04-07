@@ -104,107 +104,33 @@ export default function Main() {
       headers: { 'Content-Type': 'application/json' }
     });
 
-    // const data = await fetch("/api/v2/lights/status", {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ led: 17 })
-    // });
-
-    // const data2 = await fetch("/api/v2/lights/status", {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ led: 27 })
-    // });
-
-    // const data3 = await fetch("/api/v2/lights/status", {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ led: 22 })
-    // });
-
-    // const data4 = await fetch("/api/v2/lights/status", {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ led: 23 })
-    // });
-
-    // const data5 = await fetch("/api/v2/lights/status", {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ led: 24 })
-    // });
-
-    // const data6 = await fetch("/api/v2/lights/status", {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ led: 25 })
-    // });
-
-    // const data7 = await fetch("/api/v2/lights/status", {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ led: 16 })
-    // });
-
-    // const data8 = await fetch("/api/v2/lights/status", {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ led: 26 })
-    // });
-
-    // newList.push(await data.json());
-    // newList.push(await data2.json());
-    // newList.push(await data3.json());
-    // newList.push(await data4.json());
-    // newList.push(await data5.json());
-    // newList.push(await data6.json());
-    // newList.push(await data7.json());
-    // newList.push(await data8.json());
-
     const res = await data.json();
-    // await res.data.forEach(item => newList.push(item));
 
     await res.data.map(async (item, index) => {
       switch (index) {
         case 0:
-          if (item.data) {
-            newConf.lights[0].light1 = (parseInt(item.data) === 1);
-          };
+          newConf.lights[0].light1 = (parseInt(item) === 1);
           break;
         case 1:
-          if (item.data) {
-            newConf.lights[0].light2 = (parseInt(item.data) === 1);
-          };
+          newConf.lights[0].light2 = (parseInt(item) === 1);
           break;
         case 2:
-          if (item.data) {
-            newConf.lights[1].light1 = (parseInt(item.data) === 1);
-          };
+          newConf.lights[1].light1 = (parseInt(item) === 1);
           break;
         case 3:
-          if (item.data) {
-            newConf.lights[1].light2 = (parseInt(item.data) === 1);
-          };
+          newConf.lights[1].light2 = (parseInt(item) === 1);
           break;
         case 4:
-          if (item.data) {
-            newConf.lights[2].light1 = (parseInt(item.data) === 1);
-          };
+          newConf.lights[2].light1 = (parseInt(item) === 1);
           break;
         case 5:
-          if (item.data) {
-            newConf.lights[2].light2 = (parseInt(item.data) === 1);
-          };
+          newConf.lights[2].light2 = (parseInt(item) === 1);
           break;
         case 6:
-          if (item.data) {
-            newConf.lights[3].light1 = (parseInt(item.data) === 1);
-          };
+          newConf.lights[3].light1 = (parseInt(item) === 1);
           break;
         case 7:
-          if (item.data) {
-            newConf.lights[3].light2 = (parseInt(item.data) === 1);
-          };
+          newConf.lights[3].light2 = (parseInt(item) === 1);
           break;
         default:
           console.log('No se asignaron configs');
