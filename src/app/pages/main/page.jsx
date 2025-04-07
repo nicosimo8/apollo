@@ -161,9 +161,10 @@ export default function Main() {
     // newList.push(await data7.json());
     // newList.push(await data8.json());
 
-    console.log(data)
-    console.log(data.data)
-    newList = await data.data;
+    const res = await data.json();
+    console.log(res)
+    console.log(res.data)
+    newList = await res.data;
 
     newList.map(async (item, index) => {
       switch (index) {
