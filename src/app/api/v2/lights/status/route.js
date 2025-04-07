@@ -13,7 +13,7 @@ export async function GET() {
         let output;
 
         py.stdout.on('data', (data) => {
-          output = data;
+          output = JSON.parse(data);
         });
 
         py.stderr.on('error', (err) => {
