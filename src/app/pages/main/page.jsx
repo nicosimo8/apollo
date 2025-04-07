@@ -100,61 +100,70 @@ export default function Main() {
     await changeConfig(newConf);
 
     const data = await fetch("/api/v2/lights/status", {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ led: 17 })
+      method: "GET",
+      headers: { 'Content-Type': 'application/json' }
     });
 
-    const data2 = await fetch("/api/v2/lights/status", {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ led: 27 })
-    });
+    // const data = await fetch("/api/v2/lights/status", {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({ led: 17 })
+    // });
 
-    const data3 = await fetch("/api/v2/lights/status", {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ led: 22 })
-    });
+    // const data2 = await fetch("/api/v2/lights/status", {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({ led: 27 })
+    // });
 
-    const data4 = await fetch("/api/v2/lights/status", {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ led: 23 })
-    });
+    // const data3 = await fetch("/api/v2/lights/status", {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({ led: 22 })
+    // });
 
-    const data5 = await fetch("/api/v2/lights/status", {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ led: 24 })
-    });
+    // const data4 = await fetch("/api/v2/lights/status", {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({ led: 23 })
+    // });
 
-    const data6 = await fetch("/api/v2/lights/status", {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ led: 25 })
-    });
+    // const data5 = await fetch("/api/v2/lights/status", {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({ led: 24 })
+    // });
 
-    const data7 = await fetch("/api/v2/lights/status", {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ led: 16 })
-    });
+    // const data6 = await fetch("/api/v2/lights/status", {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({ led: 25 })
+    // });
 
-    const data8 = await fetch("/api/v2/lights/status", {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ led: 26 })
-    });
+    // const data7 = await fetch("/api/v2/lights/status", {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({ led: 16 })
+    // });
 
-    newList.push(await data.json());
-    newList.push(await data2.json());
-    newList.push(await data3.json());
-    newList.push(await data4.json());
-    newList.push(await data5.json());
-    newList.push(await data6.json());
-    newList.push(await data7.json());
-    newList.push(await data8.json());
+    // const data8 = await fetch("/api/v2/lights/status", {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify({ led: 26 })
+    // });
+
+    // newList.push(await data.json());
+    // newList.push(await data2.json());
+    // newList.push(await data3.json());
+    // newList.push(await data4.json());
+    // newList.push(await data5.json());
+    // newList.push(await data6.json());
+    // newList.push(await data7.json());
+    // newList.push(await data8.json());
+
+    console.log(data)
+    console.log(data.data)
+    newList = await data.data;
 
     newList.map(async (item, index) => {
       switch (index) {
