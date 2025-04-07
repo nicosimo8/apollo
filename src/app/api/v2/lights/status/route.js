@@ -30,7 +30,7 @@ export async function GET() {
       return result;
     };
 
-    const data = await execPython('./src/app/api/v1/lights/status/lightsCheck.py', null);
+    const data = await execPython('./src/app/api/v2/lights/status/lightsCheck.py', null);
 
     console.log('***Semáforo - FIN***');
 
@@ -81,7 +81,7 @@ export async function POST(req) {
       return result;
     };
 
-    const data = await execPython('./src/app/api/v1/lights/status/lightCheck.py', [led]);
+    const data = await execPython('./src/app/api/v2/lights/status/lightCheck.py', [led]);
 
     console.log('***Semáforo - FIN***');
 

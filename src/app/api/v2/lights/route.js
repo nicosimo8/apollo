@@ -1,13 +1,10 @@
 import { NextResponse } from "next/server";
 import { PythonShell } from 'python-shell';
-import lock from '@/../lock.json';
 
 export async function POST(req) {
   try {
     console.log('***Semáforo - INICIO***');
     console.log('- Consultando pedido');
-
-    if (lock.lock) throw new Error('Licencia expiranda');
 
     const { led, onoff } = await req.json();
     let file = "lightOn.py";
@@ -20,7 +17,7 @@ export async function POST(req) {
       file = "lightOff.py"
     }
 
-    await PythonShell.run(`./src/app/api/v1/lights/pythonScripts/${file}`, { args: [led] }, (err, results) => {
+    await PythonShell.run(`./src/app/api/v2/lights/pythonScripts/${file}`, { args: [led] }, (err, results) => {
       if (err) throw err;
     });
 
@@ -42,7 +39,7 @@ export async function GET() {
   try {
     console.log('***Test de LEDs - INICIO***');
 
-    await PythonShell.run('./src/app/api/v1/lights/lightsTest.py', (err, results) => {
+    await PythonShell.run('./src/app/api/v2/lights/lightsTest.py', (err, results) => {
       if (err) throw err;
       console.log('Results: ', results);
     });
