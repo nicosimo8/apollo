@@ -9,11 +9,13 @@ import "../globals.css";
 
 export default function RootLayout({ children }) {
   const [lock, setLock] = useState(false);
+  const [exit, setExit] = useState(undefined);
   const router = useRouter();
 
   useEffect(() => {
     if (window) {
-      checkLock()
+      checkLock();
+      setExit(sessionStorage.getItem("name") || localStorage.getItem("name"));
     };
   }, []);
 
@@ -125,7 +127,7 @@ export default function RootLayout({ children }) {
         <Img
           src={'/assets/images/icons/Salir.png'}
           alt={"exit-icon"}
-          className={Styles.layoutHeaderExit}
+          className={exit && Styles.layoutHeaderExit || Styles.layoutHeaderExitOff}
           onClick={handleClick}
         />
       </header>
