@@ -89,56 +89,59 @@ export default function Main() {
   };
 
   const ledStatus = async () => {
-    let newList = [];
-    let newConf = await checkConfig();
+    try {
+      let newConf = await checkConfig();
 
-    newConf.lights.forEach(item => {
-      item.light1 = false;
-      item.light2 = false;
-    });
+      newConf.lights.forEach(item => {
+        item.light1 = false;
+        item.light2 = false;
+      });
 
-    await changeConfig(newConf);
+      await changeConfig(newConf);
 
-    const data = await fetch("/api/v2/lights/status", {
-      method: "GET",
-      headers: { 'Content-Type': 'application/json' }
-    });
+      const data = await fetch("/api/v2/lights/status", {
+        method: "GET",
+        headers: { 'Content-Type': 'application/json' }
+      });
 
-    const res = await data.json();
+      const res = await data.json();
 
-    await res.data.map(async (item, index) => {
-      switch (index) {
-        case 0:
-          newConf.lights[0].light1 = (parseInt(item) === 1);
-          break;
-        case 1:
-          newConf.lights[0].light2 = (parseInt(item) === 1);
-          break;
-        case 2:
-          newConf.lights[1].light1 = (parseInt(item) === 1);
-          break;
-        case 3:
-          newConf.lights[1].light2 = (parseInt(item) === 1);
-          break;
-        case 4:
-          newConf.lights[2].light1 = (parseInt(item) === 1);
-          break;
-        case 5:
-          newConf.lights[2].light2 = (parseInt(item) === 1);
-          break;
-        case 6:
-          newConf.lights[3].light1 = (parseInt(item) === 1);
-          break;
-        case 7:
-          newConf.lights[3].light2 = (parseInt(item) === 1);
-          break;
-        default:
-          console.log('No se asignaron configs');
-          break;
-      };
-    });
+      await res.data.map(async (item, index) => {
+        switch (index) {
+          case 0:
+            newConf.lights[0].light1 = (parseInt(item) === 1);
+            break;
+          case 1:
+            newConf.lights[0].light2 = (parseInt(item) === 1);
+            break;
+          case 2:
+            newConf.lights[1].light1 = (parseInt(item) === 1);
+            break;
+          case 3:
+            newConf.lights[1].light2 = (parseInt(item) === 1);
+            break;
+          case 4:
+            newConf.lights[2].light1 = (parseInt(item) === 1);
+            break;
+          case 5:
+            newConf.lights[2].light2 = (parseInt(item) === 1);
+            break;
+          case 6:
+            newConf.lights[3].light1 = (parseInt(item) === 1);
+            break;
+          case 7:
+            newConf.lights[3].light2 = (parseInt(item) === 1);
+            break;
+          default:
+            console.log('No se asignaron configs');
+            break;
+        };
+      });
 
-    await changeConfig(newConf);
+      await changeConfig(newConf);
+    } catch (e) {
+      console.log(e.message)
+    };
   };
 
   const checkConfig = async () => {
