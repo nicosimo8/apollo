@@ -1,0 +1,1 @@
+sudo docker exec -it apolodb mysql -uargos -pargos

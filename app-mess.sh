@@ -12,3 +12,9 @@ yes | sudo rm -rf public
 yes | sudo rm -rf node_modules
 yes | sudo rm -rf build
 yes | sudo rm -rf .next
+yes | sudo rm -rf app-install.sh
+yes | sudo rm -rf app-create.sh
+yes | sudo rm -rf app-delete.sh
+yes | sudo rm -rf app-update.sh
+yes | sudo rm -rf app-cdb.sh
+yes | sudo rm -rf app-ddb.sh

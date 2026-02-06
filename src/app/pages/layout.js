@@ -1,64 +1,80 @@
 'use client'
 
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-import data from './config/config.json';
-import lock from '@/../lock.json';
+import { useEffect, useState } from "react";
 
 import Img from "../components/shared/Img";
 import Styles from './layout.module.css';
 import "../globals.css";
 
 export default function RootLayout({ children }) {
+  const [lock, setLock] = useState(false);
+  const [exit, setExit] = useState(undefined);
   const router = useRouter();
 
   useEffect(() => {
     if (window) {
-      checkLock()
+      checkLock();
+      setExit(sessionStorage.getItem("name") || localStorage.getItem("name"));
     };
   }, []);
 
   const checkLock = async () => {
-    const data = await fetch("/api/v1/time", {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' }
-    });
+    try {
+      const data = await fetch("/api/v2/time", {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' }
+      });
 
-    const res = await data.json();
+      if (!data.ok) {
+        const res = await data.json();
+        throw new Error(res.message);
+      }
 
-    if (res.data.lock) {
-      await handleClick();
-      alert('Su licencia ha Expirado! \n Contactenos!')
-    };
+      const res = await data.json();
+
+      if (res[0].isLocked) {
+        setLock(true);
+        await handleClick();
+        alert('Su licencia ha Expirado! \n Contactenos!')
+      };
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const handleClick = async () => {
     sessionStorage.removeItem('name');
     localStorage.removeItem('name');
-    await changeConfig(data);
-    await data.lights.map((item, index) => {
+    const li = await changeConfig();
+    await li.map((item, index) => {
       changeLed(index + 1, false);
       changeLed(index + 5, false);
     });
     router.push('/pages/login');
   };
 
-  const changeConfig = async (config) => {
-    let newConf = config;
-    newConf.lights.forEach(item => {
-      item.light1 = false;
-      item.light2 = false;
-    });
-
-    const data = await fetch("/api/v1/configs", {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newConf)
+  const changeConfig = async () => {
+    const data = await fetch("/api/v2/configs/lights", {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
     });
 
     const res = await data.json();
 
-    res;
+    await res.map(async (item, index) => {
+      const c = await fetch(`/api/v2/configs/lights/${index}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          light1: false,
+          light2: false
+        })
+      });
+      c
+    });
+
+    return res;
   };
 
   const changeLed = async (led, onoff) => {
@@ -111,7 +127,7 @@ export default function RootLayout({ children }) {
         <Img
           src={'/assets/images/icons/Salir.png'}
           alt={"exit-icon"}
-          className={Styles.layoutHeaderExit}
+          className={exit && Styles.layoutHeaderExit || Styles.layoutHeaderExitOff}
           onClick={handleClick}
         />
       </header>

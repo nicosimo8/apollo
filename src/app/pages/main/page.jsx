@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
-import data from '../config/config.json';
 import {
   newButOffGreen,
   newButOnGreen,
@@ -13,7 +12,46 @@ import {
 import Styles from './main.module.css';
 
 export default function Main() {
-  const [configs, setConfigs] = useState(data);
+  const [configs, setConfigs] = useState(
+    {
+      lightsQuantity: 0,
+      lightsMode: 8,
+      lights: [
+        {
+          lightName: "Semáforo 1",
+          lightsNumber: 2,
+          light1: false,
+          light2: false,
+          avaible: true,
+          lightsMode: 1
+        },
+        {
+          lightName: "Semáforo 2",
+          lightsNumber: 2,
+          light1: false,
+          light2: false,
+          avaible: true,
+          lightsMode: 1
+        },
+        {
+          lightName: "Semáforo 3",
+          lightsNumber: 2,
+          light1: false,
+          light2: false,
+          avaible: true,
+          lightsMode: 1
+        },
+        {
+          lightName: "Semáforo 4",
+          lightsNumber: 2,
+          light1: false,
+          light2: false,
+          avaible: true,
+          lightsMode: 1
+        }
+      ]
+    }
+  );
 
   const router = useRouter();
 
@@ -28,148 +66,136 @@ export default function Main() {
   }, []);
 
   const checkLock = async () => {
-    const data = await fetch("/api/v1/time", {
+    try {
+      const data = await fetch("/api/v2/time", {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' }
+      });
+
+      if (!data.ok) {
+        const res = await data.json();
+        throw new Error(res.message);
+      }
+
+      const res = await data.json();
+
+      if (res[0].isLocked) {
+        await handleClick();
+        alert('Su licencia ha Expirado! \n Contactenos!')
+      };
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const ledStatus = async () => {
+    try {
+      let newConf = await checkConfig();
+
+      newConf.lights.forEach(item => {
+        item.light1 = false;
+        item.light2 = false;
+      });
+
+      await changeConfig(newConf);
+
+      const data = await fetch("/api/v2/lights/status", {
+        method: "GET",
+        headers: { 'Content-Type': 'application/json' }
+      });
+
+      const res = await data.json();
+
+      await res.data.map(async (item, index) => {
+        switch (index) {
+          case 0:
+            newConf.lights[0].light1 = (parseInt(item) === 1);
+            break;
+          case 1:
+            newConf.lights[0].light2 = (parseInt(item) === 1);
+            break;
+          case 2:
+            newConf.lights[1].light1 = (parseInt(item) === 1);
+            break;
+          case 3:
+            newConf.lights[1].light2 = (parseInt(item) === 1);
+            break;
+          case 4:
+            newConf.lights[2].light1 = (parseInt(item) === 1);
+            break;
+          case 5:
+            newConf.lights[2].light2 = (parseInt(item) === 1);
+            break;
+          case 6:
+            newConf.lights[3].light1 = (parseInt(item) === 1);
+            break;
+          case 7:
+            newConf.lights[3].light2 = (parseInt(item) === 1);
+            break;
+          default:
+            console.log('No se asignaron configs');
+            break;
+        };
+      });
+
+      await changeConfig(newConf);
+    } catch (e) {
+      console.log(e.message)
+    };
+  };
+
+  const checkConfig = async () => {
+    const data = await fetch("/api/v2/configs/config", {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    });
+
+    const dataLights = await fetch("/api/v2/configs/lights", {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' }
     });
 
     const res = await data.json();
+    const resLights = await dataLights.json();
 
-    if (res.data.lock) {
-      await handleClick();
-      alert('Su licencia ha Expirado! \n Contactenos!')
-    };
-  };
-
-  const ledStatus = async () => {
-    let newList = [];
-    let newConf = configs;
-
-    newConf.lights.forEach(item => {
-      item.light1 = false;
-      item.light2 = false;
-    });
-
-    await changeConfig(await newConf);
-
-    const data = await fetch("/api/v1/lights/status", {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ led: 17 })
-    });
-
-    const data2 = await fetch("/api/v1/lights/status", {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ led: 27 })
-    });
-
-    const data3 = await fetch("/api/v1/lights/status", {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ led: 22 })
-    });
-
-    const data4 = await fetch("/api/v1/lights/status", {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ led: 23 })
-    });
-
-    const data5 = await fetch("/api/v1/lights/status", {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ led: 24 })
-    });
-
-    const data6 = await fetch("/api/v1/lights/status", {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ led: 25 })
-    });
-
-    const data7 = await fetch("/api/v1/lights/status", {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ led: 16 })
-    });
-
-    const data8 = await fetch("/api/v1/lights/status", {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ led: 26 })
-    });
-
-    newList.push(await data.json());
-    newList.push(await data2.json());
-    newList.push(await data3.json());
-    newList.push(await data4.json());
-    newList.push(await data5.json());
-    newList.push(await data6.json());
-    newList.push(await data7.json());
-    newList.push(await data8.json());
-
-    newList.map(async (item, index) => {
-      switch (index) {
-        case 0:
-          if (item.data) {
-            newConf.lights[0].light1 = (parseInt(item.data) === 1);
-          };
-          break;
-        case 1:
-          if (item.data) {
-            newConf.lights[0].light2 = (parseInt(item.data) === 1);
-          };
-          break;
-        case 2:
-          if (item.data) {
-            newConf.lights[1].light1 = (parseInt(item.data) === 1);
-          };
-          break;
-        case 3:
-          if (item.data) {
-            newConf.lights[1].light2 = (parseInt(item.data) === 1);
-          };
-          break;
-        case 4:
-          if (item.data) {
-            newConf.lights[2].light1 = (parseInt(item.data) === 1);
-          };
-          break;
-        case 5:
-          if (item.data) {
-            newConf.lights[2].light2 = (parseInt(item.data) === 1);
-          };
-          break;
-        case 6:
-          if (item.data) {
-            newConf.lights[3].light1 = (parseInt(item.data) === 1);
-          };
-          break;
-        case 7:
-          if (item.data) {
-            newConf.lights[3].light2 = (parseInt(item.data) === 1);
-          };
-          break;
-        default:
-          console.log('No se asignaron configs');
-          break;
-      };
-    });
-
-    await changeConfig(await newConf);
+    setConfigs({ ...configs, lights: resLights });
+    setConfigs({ ...configs, lightsQuantity: res[0].lightsQuantity });
+    setConfigs({ ...configs, lightsMode: res[0].lightsMode });
+    let newCon = configs;
+    newCon.lights = resLights;
+    newCon.lightsQuantity = res[0].lightsQuantity;
+    newCon.lightsMode = res[0].lightsMode;
+    return newCon;
   };
 
   const changeConfig = async (config) => {
-    const data = await fetch("/api/v1/configs", {
-      method: 'POST',
+    const newLights = [];
+
+    const data = await fetch("/api/v2/configs/config", {
+      method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(config)
+      body: JSON.stringify({
+        lightsQuantity: config.lightsQuantity,
+        lightsMode: config.lightsMode
+      })
+    });
+
+    await config.lights.map(async (item, index) => {
+      const dataLight = await fetch(`/api/v2/configs/lights/${index}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(config.lights[index])
+      });
+      const re = await dataLight.json();
+
+      newLights.push(re);
     });
 
     const res = await data.json();
 
-    setConfigs(res.data);
+    setConfigs({ ...configs, lights: newLights });
+    setConfigs({ ...configs, lightsQuantity: res[0].lightsQuantity });
+    setConfigs({ ...configs, lightsMode: res[0].lightsMode });
   };
 
   const handleClick = async (id, number, led) => {
@@ -214,7 +240,7 @@ export default function Main() {
         break;
     };
 
-    const data = await fetch('/api/v1/lights/', {
+    const data = await fetch('/api/v2/lights/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ led, onoff })
@@ -232,13 +258,13 @@ export default function Main() {
           return (
             <div key={index}>
               {item.avaible && <div className={Styles.InnerLightsContainer}>
-                <p>{item.name}</p>
+                <p>{item.lightName}</p>
                 <div className={Styles.InnerLightsContainerButtons}>
                   <div onClick={() => handleClick(index, 1, (index + 1))}>
                     {item.light1 && newButOnRed || newButOffRed}
                   </div>
                   <div onClick={() => handleClick(index, 2, (index + 5))}>
-                    {item.lights == 2 && (item.light2 && newButOnGreen || newButOffGreen)}
+                    {item.lightsNumber == 2 && (item.light2 && newButOnGreen || newButOffGreen)}
                   </div>
                 </div>
               </div>}

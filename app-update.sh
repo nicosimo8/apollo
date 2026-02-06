@@ -20,6 +20,7 @@ sudo docker ps -a
 sudo docker image ls
 
 sh app-create.sh
+sh app-perm.sh
 
 echo "******APP-UPDATE FIN******"
 }
