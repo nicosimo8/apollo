@@ -6,16 +6,16 @@ sudo docker image ls
 
 echo "******DETENIENDO Y ELIMINANDO EL CONTAINER******"
 sudo docker stop apollocontainer
-sudo docker rm apollocontainer
+sudo docker rm apollocontainer -f
 sudo docker stop apolodb
-sudo docker rm apolodb
+sudo docker rm apolodb -f
 
 echo "******ELIMINANDO LA IMAGEN******"
 sudo docker image rm apolloimg:v0
 
 echo "******LIMPIANDO RESTOS******"
 sudo docker network rm apolonet
-sudo docker system prune -a --volumes
+yes | sudo docker system prune -a --volumes
 
 echo "******VOLVER A CHECKEAR LOS CONTAINERS E IMAGENES******"
 sudo docker ps -a
