@@ -13,6 +13,10 @@ sudo docker rm apolodb
 echo "******ELIMINANDO LA IMAGEN******"
 sudo docker image rm apolloimg:v0
 
+echo "******LIMPIANDO RESTOS******"
+sudo docker network rm apolonet
+sudo docker system prune -a --volumes
+
 echo "******VOLVER A CHECKEAR LOS CONTAINERS E IMAGENES******"
 sudo docker ps -a
 sudo docker image ls
