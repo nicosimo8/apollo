@@ -7,6 +7,8 @@ sudo docker image ls
 echo "******DETENIENDO Y ELIMINANDO EL CONTAINER******"
 sudo docker stop apollocontainer
 sudo docker rm apollocontainer
+sudo docker stop apolodb
+sudo docker rm apolodb
 
 echo "******ELIMINANDO LA IMAGEN******"
 sudo docker image rm apolloimg:v0
