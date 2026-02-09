@@ -11,6 +11,8 @@ import {
 } from './buttons.jsx';
 import Styles from './main.module.css';
 
+import { licenceAuth } from "@/utils/auth.js"
+
 export default function Main() {
   const [configs, setConfigs] = useState(
     {
@@ -67,25 +69,16 @@ export default function Main() {
 
   const checkLock = async () => {
     try {
-      const data = await fetch("/api/v2/time", {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' }
-      });
-
-      if (!data.ok) {
-        const res = await data.json();
-        throw new Error(res.message);
-      }
-
-      const res = await data.json();
-
-      if (res[0].isLocked) {
+      const auth = await licenceAuth();
+      if (auth.validation) {
+      } else {
+        console.log(auth.message);
         await handleClick();
         alert('Su licencia ha Expirado! \n Contactenos!')
-      };
+      }
     } catch (e) {
       console.log(e);
-    }
+    };
   };
 
   const ledStatus = async () => {
@@ -101,7 +94,10 @@ export default function Main() {
 
       const data = await fetch("/api/v2/lights/status", {
         method: "GET",
-        headers: { 'Content-Type': 'application/json' }
+        headers: {
+          'Content-Type': 'application/json',
+          'authorization': `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`
+        }
       });
 
       const res = await data.json();
@@ -147,12 +143,18 @@ export default function Main() {
   const checkConfig = async () => {
     const data = await fetch("/api/v2/configs/config", {
       method: 'GET',
-      headers: { 'Content-Type': 'application/json' }
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`
+      }
     });
 
     const dataLights = await fetch("/api/v2/configs/lights", {
       method: 'GET',
-      headers: { 'Content-Type': 'application/json' }
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`
+      }
     });
 
     const res = await data.json();
@@ -173,7 +175,10 @@ export default function Main() {
 
     const data = await fetch("/api/v2/configs/config", {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`
+      },
       body: JSON.stringify({
         lightsQuantity: config.lightsQuantity,
         lightsMode: config.lightsMode
@@ -183,7 +188,10 @@ export default function Main() {
     await config.lights.map(async (item, index) => {
       const dataLight = await fetch(`/api/v2/configs/lights/${index}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'authorization': `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`
+        },
         body: JSON.stringify(config.lights[index])
       });
       const re = await dataLight.json();
@@ -202,11 +210,11 @@ export default function Main() {
     let newConf = configs;
 
     if (number == 1) {
-      newConf.lights[id].light1 = !newConf.lights[id].light1;
-      await changeLed(led, newConf.lights[id].light1);
+      newConf?.lights[id]?.light1 = !newConf?.lights[id]?.light1;
+      await changeLed(led, newConf?.lights[id]?.light1);
     } else {
-      newConf.lights[id].light2 = !newConf.lights[id].light2;
-      await changeLed(led, newConf.lights[id].light2);
+      newConf?.lights[id]?.light2 = !newConf?.lights[id]?.light2;
+      await changeLed(led, newConf?.lights[id]?.light2);
     };
 
     await changeConfig(newConf);
@@ -242,7 +250,10 @@ export default function Main() {
 
     const data = await fetch('/api/v2/lights/', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`
+      },
       body: JSON.stringify({ led, onoff })
     });
 
@@ -253,8 +264,8 @@ export default function Main() {
 
   return <div className={Styles.mainContainer}>
     <div className={Styles.mainContainerLightsContainer}>
-      {configs.lights.map((item, index) => {
-        if (index < configs.lightsQuantity) {
+      {configs?.lights?.map((item, index) => {
+        if (index < configs?.lightsQuantity) {
           return (
             <div key={index}>
               {item.avaible && <div className={Styles.InnerLightsContainer}>
