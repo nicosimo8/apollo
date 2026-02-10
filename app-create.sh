@@ -16,6 +16,7 @@ sudo docker run \
   -d \
   --restart=always \
   -v /sys:/sys \
+  -v /home/Argos:/home/Argos \
   -p3000:3000 \
   --name apollocontainer \
   --network apolonet \

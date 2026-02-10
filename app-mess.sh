@@ -1,4 +1,6 @@
 yes | sudo rm -rf readme.md
+yes | sudo rm -rf README.md
+
 yes | sudo rm -rf package.json
 yes | sudo rm -rf package-lock.json
 yes | sudo rm -rf next.config.mjs
@@ -12,9 +14,52 @@ yes | sudo rm -rf public
 yes | sudo rm -rf node_modules
 yes | sudo rm -rf build
 yes | sudo rm -rf .next
+yes | sudo rm -rf .git
+yes | sudo rm -rf .gitignore
+
 yes | sudo rm -rf app-install.sh
 yes | sudo rm -rf app-create.sh
 yes | sudo rm -rf app-delete.sh
 yes | sudo rm -rf app-update.sh
 yes | sudo rm -rf app-cdb.sh
 yes | sudo rm -rf app-ddb.sh
+
+yes | sudo rm -rf apolo.service
+yes | sudo rm -rf apolodb.service
+yes | sudo rm -rf estado_led_anodo.service
+yes | sudo rm -rf test.service
+
+yes | sudo rm -rf cheatsheet.sql
+
+yes | sudo rm -rf readme.md
+yes | sudo rm -rf README.md
+
+yes | sudo rm -rf package.json
+yes | sudo rm -rf package-lock.json
+yes | sudo rm -rf next.config.mjs
+yes | sudo rm -rf lock.json
+yes | sudo rm -rf jsconfig.json
+yes | sudo rm -rf eslint.config.mjs
+yes | sudo rm -rf Dockerfile
+yes | sudo rm -rf .env
+yes | sudo rm -rf src
+yes | sudo rm -rf public
+yes | sudo rm -rf node_modules
+yes | sudo rm -rf build
+yes | sudo rm -rf .next
+
+yes | sudo rm -rf app-install.sh
+yes | sudo rm -rf app-create.sh
+yes | sudo rm -rf app-delete.sh
+yes | sudo rm -rf app-update.sh
+yes | sudo rm -rf app-cdb.sh
+yes | sudo rm -rf app-ddb.sh
+
+yes | sudo rm -rf apolo.service
+yes | sudo rm -rf apolodb.service
+yes | sudo rm -rf estado_led_anodo.service
+yes | sudo rm -rf test.service
+
+yes | sudo rm -rf cheatsheet.sql
+
+yes | sudo rm -rf app-mess.sh
