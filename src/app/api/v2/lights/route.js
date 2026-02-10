@@ -1,32 +1,61 @@
 import { NextResponse } from "next/server";
 import { PythonShell } from 'python-shell';
 
+import { publicAuth } from '@/utils/auth';
+
 export async function POST(req) {
   try {
-    console.log('***Semáforo - INICIO***');
-    console.log('- Consultando pedido');
+    const token = await req.headers.get('authorization');
 
-    const { led, onoff } = await req.json();
-    let file = "lightOn.py";
+    if (!token) {
+      return NextResponse.json({
+        message: 'Unauthorized: No Authorization header',
+        validation: false
+      }, { status: 401 });
+    };
 
-    console.log(`- Pedido para GPIO #${led} - Estado: ${onoff}`);
+    const authToken = token.split(' ')[1].replace(/[<>]/g, "");
 
-    if (onoff) {
-      file = "lightOn.py"
-    } else {
-      file = "lightOff.py"
-    }
+    if (!authToken) {
+      return NextResponse.json({
+        message: 'Unauthorized: Invalid Authorization header format',
+        validation: false
+      }, { status: 401 });
+    };
 
-    await PythonShell.run(`./src/app/api/v2/lights/pythonScripts/${file}`, { args: [led] }, (err, results) => {
-      if (err) throw err;
+    const auth = await publicAuth(authToken);
+
+    if (auth.validation) {
+      console.log('***Semáforo - INICIO***');
+      console.log('- Consultando pedido');
+
+      const { led, onoff } = await req.json();
+      let file = "lightOn.py";
+
+      console.log(`- Pedido para GPIO #${led} - Estado: ${onoff}`);
+
+      if (onoff) {
+        file = "lightOn.py"
+      } else {
+        file = "lightOff.py"
+      }
+
+      await PythonShell.run(`./src/app/api/v2/lights/pythonScripts/${file}`, { args: [led] }, (err, results) => {
+        if (err) throw err;
+      });
+
+      console.log('***Semáforo - FIN***');
+
+      return NextResponse.json(
+        { message: "Consulta exitosa" },
+        { status: 200 }
+      );
+    };
+
+    return NextResponse.json({
+      message: auth.message
     });
 
-    console.log('***Semáforo - FIN***');
-
-    return NextResponse.json(
-      { message: "Consulta exitosa" },
-      { status: 200 }
-    );
   } catch (e) {
     return NextResponse.json(
       { message: `Ha habido un error en la consulta: \n ${e.message}` },

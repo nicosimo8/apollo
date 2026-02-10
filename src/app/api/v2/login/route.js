@@ -1,14 +1,15 @@
 'use server'
 
 import { NextResponse } from "next/server";
-import lock from '@/../lock.json';
+import { licenceAuth } from '@/utils/auth';
 
 export async function POST(req) {
   try {
     console.log('***Login - INICIO***');
     console.log('- Consultando credenciales');
+    const licVal = await licenceAuth();
 
-    if (lock.lock) throw new Error('Su licencia ha expirado');
+    if (licVal.validation == false) throw new Error('Su licencia ha expirado');
 
     let loginUs = false;
     let loginPs = false;

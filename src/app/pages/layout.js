@@ -7,6 +7,8 @@ import Img from "../components/shared/Img";
 import Styles from './layout.module.css';
 import "../globals.css";
 
+import { licenceAuth } from "@/utils/auth.js"
+
 export default function RootLayout({ children }) {
   const [lock, setLock] = useState(false);
   const [exit, setExit] = useState(undefined);
@@ -21,26 +23,18 @@ export default function RootLayout({ children }) {
 
   const checkLock = async () => {
     try {
-      const data = await fetch("/api/v2/time", {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' }
-      });
-
-      if (!data.ok) {
-        const res = await data.json();
-        throw new Error(res.message);
-      }
-
-      const res = await data.json();
-
-      if (res[0].isLocked) {
+      const auth = await licenceAuth();
+      if (auth.validation) {
+      } else {
+        console.log(auth.message);
         setLock(true);
         await handleClick();
-        alert('Su licencia ha Expirado! \n Contactenos!')
+        alert('Su licencia ha Expirado! \n Contactenos!');
+        router.push('/pages/login');
       };
     } catch (e) {
       console.log(e);
-    }
+    };
   };
 
   const handleClick = async () => {
@@ -57,7 +51,10 @@ export default function RootLayout({ children }) {
   const changeConfig = async () => {
     const data = await fetch("/api/v2/configs/lights", {
       method: 'GET',
-      headers: { 'Content-Type': 'application/json' }
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`
+      }
     });
 
     const res = await data.json();
@@ -65,7 +62,10 @@ export default function RootLayout({ children }) {
     await res.map(async (item, index) => {
       const c = await fetch(`/api/v2/configs/lights/${index}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'authorization': `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`
+        },
         body: JSON.stringify({
           light1: false,
           light2: false
@@ -105,9 +105,12 @@ export default function RootLayout({ children }) {
         break;
     };
 
-    const data = await fetch('/api/v1/lights/', {
+    const data = await fetch('/api/v2/lights/', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': `Bearer ${process.env.NEXT_PUBLIC_API_KEY}`
+      },
       body: JSON.stringify({ led, onoff })
     });
 
@@ -146,7 +149,7 @@ export default function RootLayout({ children }) {
           </p>
         </div>
         <div className={Styles.layoutFooterActivated}>
-          <p className={lock.lock && Styles.layoutFooterActivatedOneRed || Styles.layoutFooterActivatedOne}>{lock.lock && "PRODUCTO DESACTIVADO" || "PRODUCTO ACTIVADO"}</p>
+          <p className={lock && Styles.layoutFooterActivatedOneRed || Styles.layoutFooterActivatedOne}>{lock && "PRODUCTO DESACTIVADO" || "PRODUCTO ACTIVADO"}</p>
           <p className={Styles.layoutFooterActivatedTwo}>Para más información <a href="argoscasilda@gmail.com">contáctenos</a>.</p>
         </div>
       </footer>
