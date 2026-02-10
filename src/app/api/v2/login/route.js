@@ -7,8 +7,9 @@ export async function POST(req) {
   try {
     console.log('***Login - INICIO***');
     console.log('- Consultando credenciales');
+    const licVal = await licenceAuth();
 
-    if (!await licenceAuth().validation) throw new Error('Su licencia ha expirado');
+    if (licVal.validation == false) throw new Error('Su licencia ha expirado');
 
     let loginUs = false;
     let loginPs = false;

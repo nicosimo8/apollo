@@ -29,7 +29,8 @@ export default function RootLayout({ children }) {
         console.log(auth.message);
         setLock(true);
         await handleClick();
-        alert('Su licencia ha Expirado! \n Contactenos!')
+        alert('Su licencia ha Expirado! \n Contactenos!');
+        router.push('/pages/login');
       };
     } catch (e) {
       console.log(e);
@@ -104,7 +105,7 @@ export default function RootLayout({ children }) {
         break;
     };
 
-    const data = await fetch('/api/v1/lights/', {
+    const data = await fetch('/api/v2/lights/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
