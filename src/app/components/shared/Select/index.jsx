@@ -6,6 +6,7 @@ const Select = ({
   values,
   fakeVals,
   defaultValue,
+  selected,
   placeHolder,
   readOnly,
   styleField,
@@ -30,9 +31,15 @@ const Select = ({
         onChange={onChange}
       >
         {values?.map((val, index) => {
-          return (
-            <option key={index} value={val}>{(fakeVals && fakeVals[index]) || val}</option>
-          );
+          if ((Number(index) + 1) == Number(selected)) {
+            return (
+              <option key={index} value={val} selected={"selected"}>{(fakeVals && fakeVals[index]) || val}</option>
+            );
+          } else {
+            return (
+              <option key={index} value={val}>{(fakeVals && fakeVals[index]) || val}</option>
+            );
+          };
         })}
       </select>
     </fieldset>

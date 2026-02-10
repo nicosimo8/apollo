@@ -55,8 +55,11 @@ export default function Config() {
     if (window) {
       if (!localStorage.getItem('name') && !sessionStorage.getItem('name')) {
         router.push('/pages/login');
+      } else {
+        setTimeout(async () => {
+          checkConfig();
+        }, 1000);
       };
-      checkConfig();
     };
   }, []);
 
@@ -148,9 +151,6 @@ export default function Config() {
       const res = await data.json();
       const resLights = await dataLights.json();
 
-      // setConfigs({ ...configs, lights: resLights });
-      // setConfigs({ ...configs, lightsQuantity: res[0].lightsQuantity });
-      // setConfigs({ ...configs, lightsMode: res[0].lightsMode });
       let newCon = configs;
       newCon.lights = resLights;
       newCon.lightsQuantity = res[0].lightsQuantity;
@@ -180,6 +180,7 @@ export default function Config() {
         <Select
           text={'Cantidad de semáforos'}
           defaultValue={configs.lightsQuantity}
+          selected={configs.lightsQuantity}
           values={[1, 2, 3, 4]}
           onChange={handleChange}
           name={'lightsQuantity'}
