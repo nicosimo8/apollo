@@ -60,6 +60,25 @@ git clone https://github.com/nicosimo8/apollo.git
 cd apollo/
 ```
 
+Colocar el archivo de licencia previamente generado al mismo nivel de la carpeta **/apollo** utilizando un programa como el **WinSCP** o similar.
+
+Con el mismo programa abrir el archivo app-create.sh, o reemplazar con uno ya editado, y editar las siguientes variables de entorno:
+
+```bash
+# Cambiar EDITAR por los datos correspondientes
+-e USERNAME_ONE=EDITAR \
+-e USERNAME_TWO=EDITAR \
+-e USERNAME_THREE=EDITAR \
+-e PASSWORD_ONE=EDITAR \
+-e PASSWORD_TWO=EDITAR \
+-e PASSWORD_THREE=EDITAR \
+-e CUSTOMER_NAME=EDITAR \
+-e NEXT_API_SECRET_KEY=EDITAR \
+-e NEXT_SECRET_KEY=EDITAR \
+-e NEXT_SERIAL=EDITAR \
+-e NEXT_PUBLIC_API_KEY=EDITAR \
+```
+
 Ahora solo resta usar los comando ya prearmados vas a poder ver por consola cada paso que se esté ejecutando encerrado por asteriscos (*):
 
 ```bash
@@ -72,9 +91,78 @@ sh app-update.sh
 # Eliminar Archivos innecesarios del repositorio
 sh app-mess.sh
 
+# Esperar uno o dos minutos e ingresar a la base de datos
+sudo docker exec -it apolodb mysql -uargos -pargos
 ```
 
-Y por último colocar el archivo de licencia previamente generado al mismo nivel de la carpeta **/apollo** utilizando un programa como el **WinSCP** o similar.
+Dentro del script de MySQL> copiar y pegar, o escribir manualmente lo siguiente y luego darle Enter:
+
+```SQL
+CREATE DATABASE IF NOT EXISTS argosapolodb;
+
+USE argosapolodb;
+
+CREATE TABLE configs (
+  id INT NOT NULL UNIQUE,
+  lightsQuantity INT NOT NULL DEFAULT 4,
+  lightsMode INT NOT NULL DEFAULT 8,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE lights (
+	id INT NOT NULL UNIQUE,
+	lightName VARCHAR(25) NOT NULL DEFAULT 'Semáforo',
+	lightsNumber INT NOT NULL DEFAULT 2,
+	light1 BOOLEAN DEFAULT false,
+	light2 BOOLEAN DEFAULT false,
+    avaible BOOLEAN DEFAULT true,
+	PRIMARY KEY (id)
+);
+
+INSERT INTO configs (
+	id
+)
+VALUES (
+	0
+);
+
+INSERT INTO lights (
+	id,
+	lightName
+)
+VALUES (
+	0,
+    'Semáforo 1'
+);
+
+INSERT INTO lights (
+	id,
+	lightName
+)
+VALUES (
+	1,
+    'Semáforo 2'
+);
+
+INSERT INTO lights (
+	id,
+	lightName
+)
+VALUES (
+	2,
+    'Semáforo 3'
+);
+
+INSERT INTO lights (
+	id,
+	lightName
+)
+VALUES (
+	3,
+    'Semáforo 4'
+);
+```
+
 
 ## 2. Funcionamiento
 
@@ -86,14 +174,110 @@ Para su uso en **entorno gráfico** debemos acceder desde cualquier navegador co
 
 Ej: http://apolo.local:3000/
 
-Esta app tiene cuatro rutas creadas para acceder y usar:
+Esta app tiene tres rutas creadas para acceder y usar:
 * Ingreso -> http://apolo.local:3000/pages/login
 * Principal -> http://apolo.local:3000/pages/main
 * Configuración -> http://apolo.local:3000/pages/config
-* [Licencia](http://apolo.local:3000/pages/licence) -> http://apolo.local:3000/pages/licence
 
 ### Ingreso
-Empezando por la [Ingreso](http://apolo.local:3000/pages/login), en esta sección podemos observar un titular dentro de la franja amarillenta con el logo de **APOLO** seguido de un recuadro blanco con dos casillas para ingresar "usuario" y "contraseña", un checkmark para recordar los datos y un botón de login y finalmente la firma de la empresa ***Argos Casilda S.A.S.™***.
+Empezando por la [Ingreso](http://apolo.local:3000/pages/login), en esta sección podemos observar un titular dentro de la franja amarillenta con el logo de **APOLO** seguido de un recuadro blanco con dos casillas para ingresar "usuario" y "contraseña", un checkmark para recordar los datos y un botón de login. Finalmente la firma de la empresa ***Argos Casilda S.A.S.™***.
+
+Antes de poder operar con la aplicación el usuario tiene que acceder mediante el uso de credenciales, una vez ingresado se redirecionará a la página [principal](http://apolo.local:3000/pages/main).
+
+### Principal
+La siguiente ventana, [principal](http://apolo.local:3000/pages/main), es donde se muestran los botones que simulan las luces de los semáforos.
+
+Presionar uno de los botones intentará enviar una señal al semaforo correspondiente conectado al sistema, este indicará si el mismo está encendido o apagado mediante su color opaco o radiante.
+
+**Apolo** cuenta con la capacidad de manejar un total de ocho señales ***diferentes***.
+
+### Configuración
+Por último la ventana de [Configuración](http://apolo.local:3000/pages/config) muentra la cantidad de semaforos y sus respectivos modos.
+
+La cantidad de semaforos mostrará esa misma cantidad de recuadros para configurar, la otra está en desarrollo por ahora.
+
+Cada recuadro tiene la opción de cambiar
+- El nombre de cada semáforo
+- La cantidad de luces (por ahora hasta ***dos***)
+- El modo (*En desarrollo*)
+- Si está Habilitado
+
+API
+-
+Las rutas disponibles para la ruta de esta aplicación son las siguientes:
+
+Para cada una se indica desde  http://apolo.local:3000/api/[versión]/ y tiene un ***header*** con ***authorization***.
+
+```html
+<!--HTML peticiones por REST Client-->
+Authorization: Bearer <key>
+```
+```js
+// JS Como objeto dentro de un fetch
+headers: {
+  'Content-Type': 'application/json',
+  'authorization': `Bearer ${key}`
+}
+```
+
+- configs/config [disponibles: GET, PUT]
+  * PUT body
+  ```json
+    {
+      "lightsQuantity": "",
+      "lightsMode": "",
+      "lights": [ x4
+        {
+          "lightName": "",
+          "lightsNumber": "",
+          "light1": "",
+          "light2": "",
+          "avaible": "",
+          "lightsMode": ""
+        }
+      ]
+    }
+  ```
+- configs/lights [disponibles: GET]
+- configs/lights/[light] [disponibles: GET, PUT]
+  * GET param (Un número, indica el semáforo, suele ser 1 a 4)
+  * PUT body
+  ```json
+  {
+    "lightName": "",
+    "lightsNumber": "",
+    "light1": "",
+    "light2": "",
+    "avaible": "",
+    "lightsMode": ""
+  }
+  ```
+- licence [disponibles: GET, POST]
+  * GET header (Autorización)
+  * POST body
+  ```json
+  {
+    "newLic": "key"
+  }
+  ```
+- lights [disponibles: GET, POST]
+  * GET header (Autorización)
+  * POST body
+  ```json
+  {
+    "led": "",
+    "onoff": ""
+  }
+  ```
+- login [disponibles: POST]
+  * POST body
+  ```json
+  {
+    "username": "",
+    "password": ""
+  }
+- time [obsoleto]
+
 
 ## 3. Licencia
 
