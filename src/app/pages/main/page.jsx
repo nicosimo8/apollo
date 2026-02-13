@@ -264,7 +264,7 @@ export default function Main() {
 
   return <div className={Styles.mainContainer}>
     <div className={Styles.mainContainerLightsContainer}>
-      {configs?.lights?.map((item, index) => {
+      {configs.lightsQuantity && configs?.lights?.map((item, index) => {
         if (index < configs?.lightsQuantity) {
           return (
             <div key={index}>
@@ -278,7 +278,7 @@ export default function Main() {
                     {item.lightsNumber == 2 && (item.light2 && newButOnGreen || newButOffGreen)}
                   </div>
                 </div>
-              </div>}
+              </div> || <div className={Styles.InnerLightsContainer}><p>{item.lightName}</p></div>}
             </div>
           );
         };
