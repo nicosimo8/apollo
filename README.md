@@ -23,14 +23,13 @@ Vamos a conectarnos al equipo usando el comando **ssh usuario@ip**
 # ip es el nombre asignado como parte de la ip que se le dió al OS al momento de formatearlo
 
 # ejemplo:
-ssh argos@pi
+ssh Argos@apolo
 
 # ahora va a pedir la confirmación el usuario Argos pidiendo una contraseña, la misma se asignó al momento de formatear el OS
 
 # ejemplo:
 123
 ```
-<!-- # Mauro, si estás leyendo este instructivo cabeza de borbolecaco en este caso es Argos@apolo -->
 
 Si es la primera vez que el equipo utilizado se va conectar a la raspberry va a consultar por la firma, en este caso se responde "yes"
 
