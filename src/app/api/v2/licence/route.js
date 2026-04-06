@@ -2,7 +2,7 @@ import fs from 'fs';
 import jwt from 'jsonwebtoken';
 import { NextResponse } from "next/server";
 
-import { readFile } from '@/app/utils/fileHandle'
+import { readFile } from '@/utils/fileHandle'
 
 export async function GET(req) {
   try {
